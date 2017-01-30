@@ -1,3 +1,6 @@
 # test
-sample collaboration
-sample update code
+
+##git setup
+
+* Navigate to ```htdocs```
+* ```$ git clone https://github.com/jayp3e011/test.git```
