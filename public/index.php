@@ -47,16 +47,18 @@
       </nav>
     </header>
     <!-- Full Width Column -->
-    <div class="content-wrapper background">
-      <div class="container layer">
 
       <?php
+        //routes
         if(isset($_GET['page'])){
           if($_GET['page'] == "login"){
             $page_url = "../app/views/login.php";
           }          
           else if($_GET['page'] == "register"){
             $page_url = "../app/views/register.php";
+          }          
+          else if($_GET['page'] == "exam"){
+            $page_url = "../app/views/exam.php";
           }
           else{
             $page_url = "../app/views/error404.php";
@@ -66,16 +68,11 @@
         else{
           require_once("../app/views/login.php");
         }
-      ?>
-      <?php //require_once("../app/views/login.php"); ?>
-      <?php //require_once("../app/views/register.php"); ?>
+      ?>        
 
-        
-      </div>
-      <!-- /.container -->
-    </div>
-    <!-- /.content-wrapper -->
-    <footer class="main-footer">
+
+
+<!--     <footer class="main-footer">
       <div class="container">
         <div class="pull-right hidden-xs">
           <b>Version</b> 1.0.0
@@ -83,8 +80,7 @@
         <strong>Copyright &copy; 2016-2017 <a href="#">iMock | AMA Capstone</a>.</strong> All rights
         reserved.
       </div>
-      <!-- /.container -->
-    </footer>
+    </footer> -->
   </div>
   <!-- ./wrapper -->
 
@@ -95,6 +91,9 @@
   <script src="plugins/fastclick/fastclick.js"></script>
   <script src="dist/js/app.min.js"></script>
   <script src="dist/js/demo.js"></script>
+  <!-- controllers -->
+  <script src="../app/controllers/exam.js"></script>
+  <!-- plugins -->
   <script src="plugins/iCheck/icheck.min.js"></script>
   <script>
     $(function () {
