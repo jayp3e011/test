@@ -41,6 +41,11 @@
               <li><a href="?page=register">Register</a></li>
               <li><a href="?page=exam">Exam</a></li>
               <li><a href="?page=subject">Subject</a></li>
+              <li><a href="?page=question">Question</a></li>
+              <li><a href="?page=topic">Topic</a></li>
+              <li><a href="?page=quiz">Quiz</a></li>
+              <li><a href="?page=news">News</a></li>
+              <li><a href="?page=feedback">Feedback</a></li>
             </ul>
           </div>
           <!-- /.navbar-collapse -->

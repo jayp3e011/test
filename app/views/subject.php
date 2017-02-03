@@ -6,19 +6,11 @@
 					<h3 class="box-title">Manage Subject</h3>
 				</div>
 				<div class="box-body">
-					<table class="table">
-						<caption>table title and/or explanatory text</caption>
-						<thead>
-							<tr>
-								<th colspan="5">ANSWER SHEET</th>
-								<th width="6%">ITEM NO.</th>
-								<th width="70%">QUESTION SHEET</th>
-							</tr>
-						</thead>
-						<tbody id="items">
-
-						</tbody>
-					</table>
+					<div class="row">
+						<div class="col-s12">
+							adsf
+						</div>
+					</div>
 				</div>
 				<!-- /.box-body -->
 			</div>
