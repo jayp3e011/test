@@ -1,0 +1,1 @@
+ErrorDocument 404 "<body style='background-color:#ccc;text-align:center;'><h1>404</h1><h3>Oops! Page not found.</h3> We could not find the page you were looking for. Meanwhile, you may <a href='./'>return to dashboard</a>.</body>"
