@@ -47,6 +47,7 @@
               <li><a href="?page=quiz">Quiz</a></li>
               <li><a href="?page=news">News</a></li>
               <li><a href="?page=feedback">Feedback</a></li>
+              <li><a href="?page=logout">Logout</a></li>
             </ul>
           </div>
           <!-- /.navbar-collapse -->
