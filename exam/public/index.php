@@ -28,7 +28,7 @@
       <nav class="navbar navbar-static-top">
         <div class="container">
           <div class="navbar-header">
-            <a href="?page=login" class="navbar-brand"><b>i</b>MOCK</a>
+            <a href="<?php $_SERVER['PHP_SELF'] ?>" class="navbar-brand"><b>i</b>MOCK</a>
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
               <i class="fa fa-bars"></i>
             </button>
@@ -39,15 +39,6 @@
             <ul class="nav navbar-nav">
               <li class=""><a href="?page=login">Login</a></li>
               <li><a href="?page=register">Register</a></li>
-              <li><a href="?page=user">User</a></li>
-              <li><a href="?page=exam">Exam</a></li>
-              <li><a href="?page=subject">Subject</a></li>
-              <li><a href="?page=question">Question</a></li>
-              <li><a href="?page=topic">Topic</a></li>
-              <li><a href="?page=quiz">Quiz</a></li>
-              <li><a href="?page=news">News</a></li>
-              <li><a href="?page=feedback">Feedback</a></li>
-              <li><a href="?page=logout">Logout</a></li>
             </ul>
           </div>
           <!-- /.navbar-collapse -->
@@ -68,9 +59,6 @@
           }          
           else if($_GET['page'] == "exam"){
             $page_url = "../app/views/exam.php";
-          }          
-          else if($_GET['page'] == "subject"){
-            $page_url = "../app/views/subject.php";
           }
           else{
             $page_url = "../app/views/error404.php";
