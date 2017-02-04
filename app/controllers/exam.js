@@ -22,7 +22,7 @@ $(function () {
 			    		_QUESTIONTABLE_DATA = JSON.parse(questiondata);
 				    	//renderTable([id],[data],[table columns],[actions])
 				        renderTable(id,examdata,['id','user_id','subject_id','question_id','answer'],['read']);
-				        doRenderSubject();
+
 				    });
 			    });	        
 		    });	
@@ -46,4 +46,11 @@ $(function () {
 		}
 		$('#items').html(html);
 	}
+	doRenderSubject();
+
+	$('input[type=radio]').iCheck({
+		checkboxClass: 'icheckbox_square-green',
+		radioClass: 'iradio_square-green',
+    		increaseArea: '20%' // optional
+    });
 });

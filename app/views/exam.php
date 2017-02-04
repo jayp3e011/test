@@ -32,7 +32,7 @@
 
 			<div class="box box-default">
 				<div class="box-header with-border">
-					<h3 class="box-title">Subject: </h3>
+					<h3 class="box-title">Subject: <span id=""></span></h3>
 				</div>
 				<div class="box-body">
 					<table class="table">
