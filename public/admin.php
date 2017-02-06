@@ -57,7 +57,7 @@
         }
 
         $path = array_filter(explode('/', parse_url($url, PHP_URL_PATH)));
-        $base_url = "http://". $_SERVER['HTTP_HOST'] . "/testmock/app/views/admin";
+        $base_url = "http://". $_SERVER['HTTP_HOST'] . "/testmock/public/";
         $breadcrumbs = array("<li><i class='fa fa-dashboard'></i><a href=\"$base_url\">$home</a></li>");
         $tmp = array_keys($path);
         $last = end($tmp);
@@ -65,7 +65,7 @@
         foreach ($path AS $x => $crumb) {
         $title = ucwords(str_replace(array('.php', '_'), Array('', ' '), $crumb));
         if ($x != $last){
-        $breadcrumbs[] = '<li><a href="$base_url$crumb">$title</a></li>';
+        $breadcrumbs[] = '<li><a href="'.$base_url.$crumb.'">'.$title.'</a></li>';
         }else{
         $breadcrumbs[] = $title;
         }
