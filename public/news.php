@@ -8,7 +8,7 @@
           <br><br><br><br><br><br><br>
           <h2>TIMLINE HERE</h2>
           <p>
-            tIMELINE <?php echo $_SESSION['user_level']; ?>
+            tIMELINE <?php include_once('../includes/dbconnect.php'); echo $con->userLevel().$con->userName(); ?>
           </p>
         </center>
       <div class="box-footer">

@@ -1,6 +1,5 @@
  <?php
   include_once('../includes/dbconnect.php');
-  session_start();
   if (!$con->userLevel()==1) {
     header('Location: ../public');
   }

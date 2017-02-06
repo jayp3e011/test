@@ -1,11 +1,9 @@
 <?php
+session_start();
 
 class UserClass
 {
 	private $db;
-	private $level;
-	private $fullname;
-	private $id;
 	
 	// constructor
 	function __construct($db)
@@ -26,9 +24,9 @@ class UserClass
 	
         if ($count_row == 1) {
             // this login var will use for the session thing
-            $id = $user_data['id'];
-            $level = intval($user_data['is_admin']);
-            $fullname = $user_data['first_name'].' '.$user_data['last_name'];
+            $_SESSION['id']= $user_data['id'];
+            $_SESSION['level']= intval($user_data['is_admin']);
+            $_SESSION['fullname'] = $user_data['first_name'].' '.$user_data['last_name'];
             return true;
         }
         else{
@@ -37,23 +35,22 @@ class UserClass
 	}
 	function userLevel()
 	{
-		return $level;
+		return $_SESSION['level'];
 	}
 	function userName()
 	{
-		return $fullname;
+		return $_SESSION['fullname'];
 	}
 	function userID()
 	{
-		return $id;
+		return $$_SESSION['id'];
 	}
 	function userLogout()
 	{
 		session_destroy();
-		unset($id);
-		unset($fullname);
-		unset($level);
-		$login = false;
+		unset($_SESSION['id']);
+		unset($_SESSION['level']);
+		unset($_SESSION['fullname']);
 		return;
 	}
 	

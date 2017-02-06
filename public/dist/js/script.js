@@ -43,7 +43,7 @@ $('document').ready(function() {
 		success: function(status){
 				if (status == true) {
 					$('#login').val('Signing in...');
-					setTimeout('window.location.href = "index.php";',1000);
+					setTimeout('window.location.href = "dashboard.php";',1000);
 				} else {
 					$('#err-msg').html('<div class="alert alert-danger text-center">Invalid email or password!</div>');
 					$('#email').val('');

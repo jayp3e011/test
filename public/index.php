@@ -1,15 +1,4 @@
-<?php
-  session_start();
-  include_once('../includes/dbconnect.php');
-  if ($con->userLevel()==1) {
-    require_once('admin.php');
-  }
-  if ($con->userLevel()==0){
-    require_once('student.php');
-  }
-  else{
-  ?>
-  <!DOCTYPE html>
+<!DOCTYPE html>
   <html>
   <head>
     <meta charset="utf-8">
@@ -171,5 +160,4 @@
       });
     </script>
   </body>
-  </html>
-<?php } ?>
+</html>
