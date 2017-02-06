@@ -25,6 +25,7 @@ function renderTable(id,data,columns,actions){
     html+="</tbody>"
     $(id+'table').html(html);
     var table = $(id+'table').DataTable({
+    	destroy: true,
     	"language":{
     		search: "_INPUT_",
     		searchPlaceholder: "Search entry..."
@@ -54,6 +55,7 @@ function renderTable(id,data,columns,actions){
     }
 
     if(id=='#exam')renderExamModals();
+    if(id=='#subject')renderSubjectModals();
 }
 
 function renderExamModals(){
@@ -106,6 +108,80 @@ function renderExamModals(){
 	});
 }
 
+function renderSubjectModals(){
+
+	$(_SUBJECTTABLE_SELECTED_ID + 'modal-read').on('show.bs.modal', function (event) {
+		// console.log("I'm here");
+	  var modal = $(this);
+	  modal.find('.modal-title').text('Read Entry ID: ' + _SUBJECTTABLE_SELECTED_ID)	  
+	  modal.find('.modal-body input').attr('readonly','readonly');
+	  modal.find('#subjectdescription').attr('readonly','readonly');
+
+	  _EXAMTABLE_DATA.map(function(examobj){
+	  	if(examobj.id===_EXAMTABLE_SELECTED_ID){
+	  		_USERTABLE_DATA.map(function(userobj){
+	  			if(userobj.id===examobj.user_id){
+	  				_SUBJECTTABLE_DATA.map(function(subjectobj){
+	  					if(subjectobj.id===examobj.subject_id){
+	  						_QUESTIONTABLE_DATA.map(function(questionobj){
+	  							if(questionobj.id===examobj.question_id){
+	  								modal.find('#subjectname').val(subjectobj.name);
+	  								modal.find('#subjecttimeduration').val(subjectobj.timeduration);
+	  								modal.find('#subjectpassingrate').val(subjectobj.passingrate);
+	  								modal.find('#subjectdescription').val(subjectobj.description);
+	  								modal.find('#subjectattempt').val(subjectobj.attempt);		  									  				
+	  								modal.find('#subjectitems').val(subjectobj.items);		  									  				
+	  								return;
+	  							}					  	
+	  						});
+	  						return;
+	  					}
+	  				});
+	  				return;
+	  			}
+	  		});
+	  		return;
+	  	}
+	  });
+	});
+
+	$('#subjectbtnmodalcreate').on('click',function(){				
+		console.log("clicked");
+		var newSubject = {
+			name:$('#subjectcreatename').val(),
+			timeduration:$('#subjectcreatetimeduration').val(),
+			passingrate:$('#subjectcreatepassingrate').val(),
+			description:$('#subjectcreatedescription').val(),
+			attempt:$('#subjectcreateattempt').val(),
+			items:$('#subjectcreateitems').val()
+		};
+		console.log(newSubject);
+		$.ajax({
+	        method: "POST",
+	        url: "../app/models/subject.php",
+	        data: {
+	        	action:'createsubject',
+	        	name:newSubject.name,	        	
+	        	timeduration:newSubject.timeduration,	        	
+	        	passingrate:newSubject.passingrate,	        	
+	        	description:newSubject.description,	        	
+	        	attempt:newSubject.attempt,	        	
+	        	items:newSubject.items     	
+	        }
+	    }).done(function(res){
+	    	// console.log(res);
+	    	$('#subjectmodal-create').modal('hide');
+	    	$('#subjectcreatename').val("");$('#subjectcreatetimeduration').val("");
+	    	$('#subjectcreatepassingrate').val("");$('#subjectcreatedescription').val("");
+	    	$('#subjectcreateattempt').val("");$('#subjectcreateitems').val("");
+	    	setTimeout(function(){
+	    		$('#subjecttable-loading').html('<i class="fa fa-spinner"></i> Loading...');
+	    		doRenderTable('#subject');
+	    		swal("Success!", "New subject has been created!", "success");
+	    	},1000);	    	
+	    });
+	});
+}
 
 var _EXAMTABLE_SELECTED_ID=0;
 var _SUBJECTTABLE_SELECTED_ID=0;

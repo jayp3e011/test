@@ -1,10 +1,25 @@
 <?php
-	include('conf.php');
+include('conf.php');
 
-	if($link){
+if($link){
+	if(isset($_POST['action'])){
+		if($_POST['action']=="getquestions"){
+			$table='question';
+			$sql = "select * from $table WHERE subject_id=".$_POST['subjectid'];
+			$result = mysqli_query($link, $sql) or die("Invalid query" . mysqli_error($link));
+			$arr = array();
+			$count=0;
+			while($row=mysqli_fetch_assoc($result)){
+				$arr[] = $row;
+				$count++;
+			}
+			echo json_encode($arr);
+		}
+	}
+	else{
 		$table='exam';
 		$sql = "select * from $table";
-	    $result = mysqli_query($link, $sql) or die("Invalid query" . mysqli_error($link));
+		$result = mysqli_query($link, $sql) or die("Invalid query" . mysqli_error($link));
 		$arr = array();
 		$count=0;
 		while($row=mysqli_fetch_assoc($result)){
@@ -12,7 +27,8 @@
 			$count++;
 		}
 		echo json_encode($arr);
-	}
+	}		
+}
 ?>
 
 <?php

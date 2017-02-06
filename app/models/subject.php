@@ -3,14 +3,30 @@
 
 	if($link){
 		$table='subject';
-		$sql = "select * from $table";
-	    $result = mysqli_query($link, $sql) or die("Invalid query" . mysqli_error($link));
-		$arr = array();
-		$count=0;
-		while($row=mysqli_fetch_assoc($result)){
-			$arr[] = $row;
-			$count++;
+		if(isset($_POST['action'])){
+			if($_POST['action']=="createsubject"){
+				echo "create subject ok!";
+				$name = $_POST['name'];
+				$timeduration = $_POST['timeduration'];
+				$passingrate = $_POST['passingrate'];
+				$description = $_POST['description'];
+				$attempt = $_POST['attempt'];
+				$items = $_POST['items'];
+				$sql = "insert into $table VALUES('','$name','$description','$timeduration','$passingrate','$attempt','$items')";
+				$result = mysqli_query($link, $sql) or die("Invalid query" . mysqli_error($link));
+				echo "ok";
+			}
 		}
-		echo json_encode($arr);
+		else{			
+			$sql = "select * from $table";
+		    $result = mysqli_query($link, $sql) or die("Invalid query" . mysqli_error($link));
+			$arr = array();
+			$count=0;
+			while($row=mysqli_fetch_assoc($result)){
+				$arr[] = $row;
+				$count++;
+			}
+			echo json_encode($arr);
+		}
 	}
 ?>

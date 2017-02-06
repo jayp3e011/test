@@ -32,14 +32,17 @@
 
 			<div class="box box-default">
 				<div class="box-header with-border">
-					<h3 class="box-title">Subject: <span id=""></span></h3>
+					<h3 class="box-title">Subject: <span id="subjecttitle"></span></h3>
 				</div>
-				<div class="box-body">
+				<div class="box-body">					
 					<table class="table">
-						<caption>table title and/or explanatory text</caption>
+						<caption>
+							<div id="subjectdesc">table title and/or explanatory text</div>
+							<button class="btn btn-danger pull-right" style="width: 200px">SUBMIT</button>
+						</caption>
 						<thead>
 							<tr>
-								<th colspan="5">ANSWER SHEET</th>
+								<th colspan="4">ANSWER SHEET</th>
 								<th width="6%">ITEM NO.</th>
 								<th width="70%">QUESTION SHEET</th>
 							</tr>
