@@ -8,7 +8,7 @@
           <br><br><br><br><br><br><br>
           <h2>TIMLINE HERE</h2>
           <p>
-            tIMELINE
+            tIMELINE <?php echo $_SESSION['user_level']; ?>
           </p>
         </center>
       <div class="box-footer">

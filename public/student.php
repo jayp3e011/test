@@ -62,7 +62,7 @@
         <ul class="nav navbar-nav">
           <li>
             <!-- USERNAME/LOGOUT -->
-            <a href="#', 'auth/logout')) }}">
+            <a href="../includes/logout.php">
                 <i class="fa fa-fw fa-power-off"></i> LOGOUT
             </a>
             <!-- /USERNAME/LOGOUT -->

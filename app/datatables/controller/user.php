@@ -35,6 +35,13 @@ $columns = array(
 	array( 'db' => 'email',   'dt' => 'email' ),
 	array( 'db' => 'is_admin',     'dt' => 'is_admin' ),
 	array(
+		'db'        => 'password',
+		'dt'        => 'password',
+		'formatter' => function( $d, $row ) {
+			return md5($d);
+		}
+	),
+	array(
 		'db'        => 'created_at',
 		'dt'        => 'created_at',
 		'formatter' => function( $d, $row ) {

@@ -6,6 +6,7 @@
         <th>LAST NAME</th>
         <th>Email</th>
         <th>admin</th>
+        <th>password</th>
         <th> CREATED AT</th>
         <th>ACTION</th>
     </tr>
@@ -16,6 +17,7 @@
         <th>LAST NAME</th>
         <th>Email</th>
         <th>admin</th>
+        <th>password</th>
         <th> CREATED AT</th>
         <th>ACTION</th>
     </tr>
@@ -33,6 +35,8 @@
                 {"data": "email",
                     "class": "center"},
                 {"data": "is_admin",
+                    "class": "center"},
+                {"data": "password",
                     "class": "center"},
                 {"data": "created_at",
                     "class": "center"},

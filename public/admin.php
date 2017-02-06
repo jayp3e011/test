@@ -1,4 +1,9 @@
  <?php
+  include_once('../includes/dbconnect.php');
+  session_start();
+  if (!$con->userLevel()==1) {
+    header('Location: ../public');
+  }
         $page_url = null;
         $arr_url = array($page_url);
         //routes
@@ -35,12 +40,12 @@
               $titlepage='| Admin';
             }
             else{
-              $page_url = "../app/views/error404.php";
+              $page_url = "admin.php";
             }
             require_once($page_url);
           }
           else{
-            require_once(".feedback.php");
+            require_once("feedback.php");
           }
         }
 
@@ -138,7 +143,7 @@
         <ul class="nav navbar-nav">
           <li>
             <!-- USERNAME/LOGOUT -->
-            <a href="#', 'auth/logout')) }}">
+            <a href="../includes/logout.php">
                 <i class="fa fa-fw fa-power-off"></i> LOGOUT
             </a>
             <!-- /USERNAME/LOGOUT -->
@@ -253,6 +258,7 @@
 <script src="plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/app.min.js"></script>
+<script src="dist/js/routes.js"></script>
 <!-- DataTables -->
 <script src="plugins/datatables/js/jquery.dataTables.min.js"></script>
 <script src="plugins/datatables/js/dataTables.bootstrap.min.js"></script>
