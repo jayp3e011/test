@@ -1,5 +1,8 @@
+
+
 function renderTable(id,data,columns,actions){
 	var arrofobj = JSON.parse(data);
+	// console.log(arrofobj);
 
 	if(id=='#exam'){
 		_EXAMTABLE_SELECTED_ID = id;		
@@ -183,11 +186,86 @@ function renderSubjectModals(){
 	});
 }
 
-var _EXAMTABLE_SELECTED_ID=0;
-var _SUBJECTTABLE_SELECTED_ID=0;
-var _QUESTIONTABLE_SELECTED_ID=0;
-var _USERTABLE_SELECTED_ID=0;
-var _EXAMTABLE_DATA=[];
-var _SUBJECTTABLE_DATA=[];
-var _QUESTIONTABLE_DATA=[];
-var _USERTABLE_DATA=[];
+
+/* EXAM FUNCTIONS */
+function exam_changeSubject(){
+	console.log("Changed!");
+}
+
+let _EXAMTABLE_SELECTED_ID=0;
+let _SUBJECTTABLE_SELECTED_ID=0;
+let _QUESTIONTABLE_SELECTED_ID=0;
+let _USERTABLE_SELECTED_ID=0;
+let _EXAMTABLE_DATA=[];
+let _SUBJECTTABLE_DATA=[];
+let _QUESTIONTABLE_DATA=[];
+let _USERTABLE_DATA=[];
+
+
+/*  EXAM CLASS DEFINITION HERE*/
+class Exam{
+	doRenderSubject(subjectid){
+		$.ajax({
+	        method: "POST",
+	        url: "../app/models/exam.php",
+	        data:{'subjectid':subjectid,'action':'getquestions'}
+    	}).done(function(questions){
+    		// console.log(`Subject ID: ${subjectid}`);
+    		// console.log(questions);
+    		var subjectinfo = getSubjectInfo(subjectid);
+    		// console.log(subjectinfo);
+    		$('#subjecttitle').html(subjectinfo.name);
+    		$('#subjectdesc').html(
+    			'Description: ' + subjectinfo.description + '<br/>' +
+    			'Time duration: ' + subjectinfo.timeduration + '<br/>' +
+    			'Passing Rate: ' + subjectinfo.passingrate + '<br/>' +
+    			'No. of attempts: ' + subjectinfo.attempt + '<br/>' +
+    			'No. of items: ' + subjectinfo.items + '<br/>'
+    		);
+    		// $('#subjectdesc').html(getSubjectDesc(subjectid));
+    		let quest = JSON.parse(questions);
+    		// console.log(quest)
+    		let html = "";
+    		var i = 1;
+    		for(let q in quest){
+    			html += '<tr>';
+    			html += '<td><div style="position: absolute;margin-left: 7px;margin-top:1px;">A</div><input type="radio" name="item'+i+'" /></td>';
+    			html += '<td><div style="position: absolute;margin-left: 7px;margin-top:1px;">B</div><input type="radio" name="item'+i+'" /></td>';
+    			html += '<td><div style="position: absolute;margin-left: 7px;margin-top:1px;">C</div><input type="radio" name="item'+i+'" /></td>';
+    			html += '<td><div style="position: absolute;margin-left: 7px;margin-top:1px;">D</div><input type="radio" name="item'+i+'" /></td>';
+    			html += '<td style="text-align: center;">'+ i++ +'</td>';
+    			html += '<td>';
+    			html += quest[q].question;
+    			html += '<br>A. ' + quest[q].choice_a;
+    			html += '<br>B. ' + quest[q].choice_b;
+    			html += '<br>C. ' + quest[q].choice_c;
+    			html += '<br>D. ' + quest[q].choice_d;
+    			html += '</td>';
+    			html += '</tr>';
+    		}
+    		$('#items').html(html);
+			$('input[type=radio]').iCheck({
+				checkboxClass: 'icheckbox_square-green',
+				radioClass: 'iradio_square-green',
+		    		increaseArea: '20%' // optional
+		    });
+    	});
+
+    	function getSubjectInfo(subjectid){
+    		let obj = {};
+    		let info = _SUBJECTTABLE_DATA.map(function(studentobj){
+    			if(studentobj.id==subjectid){		
+    				obj = studentobj;
+    			}
+    		});		
+    		return obj;
+    	}
+	}
+
+	updateSubjectList(){
+		_SUBJECTTABLE_DATA.map(function(subjectobj){			
+			$('#listofsubjects').append(`<li><a href="#" onclick="exam.doRenderSubject(${subjectobj.id})">${subjectobj.name}</a></li>`);
+		});
+	}
+}
+let exam = new Exam();

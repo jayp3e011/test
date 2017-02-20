@@ -38,7 +38,25 @@
 					<table class="table">
 						<caption>
 							<div id="subjectdesc">table title and/or explanatory text</div>
-							<button class="btn btn-danger pull-right" style="width: 200px">SUBMIT</button>
+							<div class="margin pull-right">								
+								<div class="btn-group">
+									<button type="button" class="btn btn-info btn-flat">Change Subject</button>
+									<button type="button" class="btn btn-info btn-flat dropdown-toggle" data-toggle="dropdown">
+										<span class="caret"></span>
+										<span class="sr-only">Toggle Dropdown</span>
+									</button>
+									<ul class="dropdown-menu" role="menu" id="listofsubjects">
+										<!-- <li><a href="#">Action</a></li>
+										<li><a href="#">Another action</a></li>
+										<li><a href="#">Something else here</a></li>
+										<li class="divider"></li>
+										<li><a href="#">Separated link</a></li> -->
+									</ul>
+								</div>
+								<div class="btn-group">
+									<button type="button" class="btn btn-danger btn-flat">Submit</button>									
+								</div>								
+							</div>
 						</caption>
 						<thead>
 							<tr>

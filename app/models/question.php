@@ -12,5 +12,8 @@
 			$count++;
 		}
 		echo json_encode($arr);
+		// echo $count;
+		// print_r($arr);
+
 	}
 ?>
