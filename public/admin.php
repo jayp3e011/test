@@ -1,7 +1,7 @@
  <?php
-  include_once('../includes/dbconnect.php');
-  if (!$con->userLevel()==1) {
-    header('Location: ../public');
+  include_once('../app/controllers/php/dbconnect.php');
+  if (!isset($_SESSION['level'])==1) {
+    header('Location: /public');
   }
         $page_url = null;
         $arr_url = array($page_url);
@@ -10,41 +10,37 @@
         {
           $titlepage = '| Admin';
           if(isset($_GET['page'])){
-            if($_GET['page'] == "questions"){
-              $page_url = "../app/views/admin/questions/index.php";
-              $titlepage='| Questions';
+            if($_GET['page'] == "exam"){
+              $page_url = "../app/views/exam.php";
             }          
-            else if($_GET['page'] == "subjects"){
-              $page_url = "../app/views/admin/subjects/index.php";
-              $titlepage='| Questions';
-            }          
-            else if($_GET['page'] == "topics"){
-              $page_url = "../app/views/admin/topics/index.php";
-              $titlepage='| Topics';
+            else if($_GET['page'] == "subject"){
+              $page_url = "../app/views/subject.php";
             }
-            else if($_GET['page'] == "guidelines"){
-              $page_url = "../app/views/admin/guidelines/index.php";
-              $titlepage='| Guidelines';
+            else if($_GET['page'] == "user"){
+              $page_url = "../app/views/user.php";
             }
-            else if($_GET['page'] == "users"){
-              $page_url = "../app/views/admin/users/index.php";
-              $titlepage='| Users';
+            else if($_GET['page'] == "topic"){
+              $page_url = "../app/views/topic.php";
             }
             else if($_GET['page'] == "news"){
-              $page_url = "../app/views/admin/news/index.php";
-              $titlepage='| News';
+              $page_url = "../app/views/news.php";
             }
-            else if($_GET['page'] == "home"){
-              $page_url = "../app/views/index.php";
-              $titlepage='| Admin';
+            else if($_GET['page'] == "feedback"){
+              $page_url = "../app/views/feedback.php";
+            }
+            else if($_GET['page'] == "guidelines"){
+              $page_url = "../app/views/guidelines.php";
+            }
+            else if($_GET['page'] == "logout"){
+              $page_url = "../app/controllers/php/logout.php";
             }
             else{
-              $page_url = "admin.php";
+              $page_url = "../app/views/error404.php";
             }
             require_once($page_url);
           }
           else{
-            require_once("feedback.php");
+            require_once("../app/views/feedback.php");
           }
         }
 
@@ -83,23 +79,26 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="icon" type="image/png" href="favicon16.png">
-  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="dist/css/font-awesome.min.css">
+  <link rel="stylesheet" href="dist/css/ionicons.min.css">
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
+  <!-- css plugins -->
+  <link rel="stylesheet" href="plugins/iCheck/square/green.css">
+  <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="plugins/sweetalert/sweetalert.css">
+
   <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="public/dist/css/skins/_all-skins.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
-  <link rel="stylesheet" href="plugins/datatables/css/dataTables.bootstrap4.css">
-  <link rel="stylesheet" href="plugins/datatables/css/jquery.dataTables_themeroller.css">
-  <link rel="stylesheet" type="text/css" href="plugins/datatables/css/jquery.dataTables.css">
-  <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+  <link rel="stylesheet" href="dist/css/skins/skin-green-light.min.css">  
+  <link rel="stylesheet" href="dist/css/app.css">
+  <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>  
+  <script src="plugins/iCheck/icheck.min.js"></script>
+  <script src="dist/js/validator.min.js"></script>
+
+  <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+  <!-- <script src="dist/js/jquery.routes.js"></script> -->
+  <script src="../app/controllers/app.js"></script>
+   <!-- <script src="../app/controllers/routes.js"></script> -->
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body class="hold-transition skin-green-light sidebar-mini">
@@ -142,7 +141,7 @@
         <ul class="nav navbar-nav">
           <li>
             <!-- USERNAME/LOGOUT -->
-            <a href="../includes/logout.php">
+            <a href="?page=logout">
                 <i class="fa fa-fw fa-power-off"></i> LOGOUT
             </a>
             <!-- /USERNAME/LOGOUT -->
@@ -170,25 +169,25 @@
         <ul class="sidebar-menu">
           <li class="header">MAIN NAVIGATION</li>
           <li class="treeview">
-            <a href="?page=questions">
+            <a href="?page=question">
               <i class="fa fa-book"></i> <span>Question</span>
               </span>
             </a>
           </li>
           <li class="treeview">
-            <a href="?page=subjects">
+            <a href="?page=subject">
               <i class="fa fa-plus-circle"></i> <span>Subject</span>
               </span>
             </a>
           </li>
           <li class="treeview">
-            <a href="?page=topics">
+            <a href="?page=topic">
               <i class="fa fa-plus-circle"></i> <span>Topic</span>
               </span>
             </a>
           </li>
           <li class="treeview">
-            <a href="?page=users">
+            <a href="?page=user">
               <i class="fa fa-users"></i> <span>User</span>
               </span>
             </a>
@@ -206,7 +205,7 @@
             </a>
           </li>
           <li class="treeview">
-            <a href="?page=reports">
+            <a href="?page=report">
               <i class="fa fa-bar-chart"></i> <span>Report</span>
               </span>
             </a>
@@ -249,17 +248,12 @@
     </div>
     <strong>Copyright &copy;2016 <a href="#">J&J</a>.</strong> All rights reserved.
   </footer>
-<!-- jQuery 2.2.3 -->
-<!-- <script src="../../../../public/plugins/jQuery/jquery-2.2.3.min.js"></script> -->
-<!-- Bootstrap 3.3.6 -->
-<script src="bootstrap/js/bootstrap.min.js"></script>
-<!-- FastClick -->
-<script src="plugins/fastclick/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/app.min.js"></script>
-<script src="dist/js/routes.js"></script>
-<!-- DataTables -->
-<script src="plugins/datatables/js/jquery.dataTables.min.js"></script>
-<script src="plugins/datatables/js/dataTables.bootstrap.min.js"></script>
+< <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+  <script src="plugins/fastclick/fastclick.js"></script>
+   <script src="plugins/sweetalert/sweetalert.min.js"></script>
+  <script src="dist/js/app.min.js"></script>
+    <script src="dist/js/script.js"></script>
+  <script src="dist/js/demo.js"></script>
 </body>
 </html>
