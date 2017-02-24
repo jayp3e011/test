@@ -50,6 +50,7 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse pull-right" id="navbar-collapse">
             <ul class="nav navbar-nav">
+              <li class=""><a href="?page=dashboard">Dashboard</a></li>
               <li class=""><a href="?page=login">Login</a></li>
               <li><a href="?page=register">Register</a></li>
               <li><a href="?page=user">User</a></li>
@@ -73,7 +74,10 @@
       <?php
         //routes
         if(isset($_GET['page'])){
-          if($_GET['page'] == "login"){
+          if($_GET['page'] == "dashboard"){
+            $page_url = "../app/views/dashboard.php";
+          } 
+          else if($_GET['page'] == "login"){
             $page_url = "../app/views/login.php";
           }          
           else if($_GET['page'] == "register"){
@@ -113,9 +117,10 @@
   <script src="bootstrap/js/bootstrap.min.js"></script>
   <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
   <script src="plugins/fastclick/fastclick.js"></script>
-   <script src="plugins/sweetalert/sweetalert.min.js"></script>
+  <script src="plugins/sweetalert/sweetalert.min.js"></script>
   <script src="dist/js/app.min.js"></script>
   <script src="dist/js/demo.js"></script>
 
+  <script src="../app/controllers/login.js"></script>
 </body>
 </html>
