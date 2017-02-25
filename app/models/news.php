@@ -18,11 +18,11 @@
 			if($_POST['action']=="updatenews"){
 				echo "update news ok!";
 				$id = $_POST['id'];
-				$user_id = $_POST['userid'];
+				// $user_id = $_POST['userid'];
 				$name = $_POST['name'];
 				$content = $_POST['content'];
 				// $date = $_POST['date'];
-				$sql = "update $table SET user_id='$user_id', name='$name', content='$content' where id='$id'";//,date='$date'
+				$sql = "update $table SET name='$name', content='$content' where id='$id'";//,date='$date'user_id='$user_id',
 				$result = mysqli_query($link, $sql) or die("Invalid query" . mysqli_error($link));
 				echo "ok";
 			}
@@ -39,7 +39,8 @@
 			}
 		}
 		else{	
-			$sql = "select * from $table";
+			// $sql = "select * from $table";
+			$sql = "select n.id, concat_ws(' ', u.firstname, u.lastname) as user_id, n.name, n.content, n.date from $table n join user u on n.user_id=u.id";
 		    $result = mysqli_query($link, $sql) or die("Invalid query" . mysqli_error($link));
 			$arr = array();
 			$count=0;

@@ -32,8 +32,10 @@
     html += "<tbody>";
     for(obj in arrofobj){
       html += "<tr>";
+      // console.log(obj);
       for(o in arrofobj[obj])
         html += '<td>'+arrofobj[obj][o]+'</td>';
+    	// console.log(obj+' '+o);
       html += "</tr>"
     }
     html+="</tbody>"
@@ -212,12 +214,7 @@ let guidelinesForm = `
 			<input type="text" class="form-control" placeholder="first name" id="userid" required>
 			<span class="glyphicon glyphicon-guidelines form-control-feedback"></span>
 		</div>
-		<div class="form-group has-feedback">
-			<label for="recipient-name" class="control-label">Subject:</label>
-			<select name="colors" class="form-control" id="subjectid">
-			</select>
-			<span class="glyphicon glyphicon-user form-control-feedback"></span>
-		</div>
+		
 		<div class="form-group has-feedback">
 			<label for="recipient-name" class="control-label">No.of Subject to Pass:</label>
 			<input type="number" class="form-control" placeholder="Subjects to Pass" id="subjectstopass" required>
@@ -225,11 +222,23 @@ let guidelinesForm = `
 		</div>
 		<div class="form-group has-feedback">
 			<label for="recipient-name" class="control-label">Date:</label>
-			<input type="datepicker" class="form-control" id="ccreatedat" required>
+			<input type="datepicker" class="form-control" id="createdat" required>
 			<span class="glyphicon glyphicon-guidelines form-control-feedback"></span>
 		</div>
 	</form>
 `;
+/* 
+<div class="form-group has-feedback">
+			<label for="recipient-name" class="control-label">Subject:</label>
+			<select name="subjects" class="form-control" id="subjectid">
+			</select>
+			<span class="glyphicon glyphicon-user form-control-feedback"></span>
+		</div>
+
+
+*/
+
+
 let feedBackForms = `
 	<form data-toggle="validator" role="form" id="addFeddback-form">
 		<div class="form-group has-feedback">
@@ -755,16 +764,17 @@ function renderNewsModals(){
 		modal.find('#content').attr('readonly','readonly');
   		_NEWSTABLE_DATA.map(function(newsobj){
   			if(newsobj.id===_EXAMTABLE_SELECTED_ID){
-  				_USERTABLE_DATA.map(function(userobj){
-  					if (userobj.id===newsobj.userid) {
-  						modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
+  				// _USERTABLE_DATA.map(function(userobj){
+  					// if (userobj.id===newsobj.userid) {
+  						// modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
+						modal.find('#userid').val(newsobj.user_id);
 						modal.find('#name').val(newsobj.name);
 						modal.find('#content').val(newsobj.content);	  									  				
 						modal.find('#createdat').val(newsobj.date);
 						console.log(newsobj);
-						return;
-  					}
-  				});
+						// return;
+  					// }
+  				// });
 				return;
   			}
   		});
@@ -777,20 +787,21 @@ function renderNewsModals(){
 	$(_NEWSTABLE_SELECTED_ID + 'modal-update').on('show.bs.modal', function (event) {
 		var modal = $(this);
 		modal.find('.modal-body').html(newsForm);
-		modal.find('.modal-title').text('Read Entry ID: ' + _USERTABLE_SELECTED_ID)	 
-		modal.find('.modal-body').html(newsForm); 
+		modal.find('#userid').attr('readonly','readonly');
+		modal.find('.modal-title').text('Edit Entry ID: ' + _USERTABLE_SELECTED_ID);
   		_NEWSTABLE_DATA.map(function(newsobj){
   			if(newsobj.id===_EXAMTABLE_SELECTED_ID){
-  				_USERTABLE_DATA.map(function(userobj){
-  					if (userobj.id===newsobj.userid) {
-  						modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
+  				// _USERTABLE_DATA.map(function(userobj){
+  					// if (userobj.id===newsobj.userid) {
+  						// modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
+						modal.find('#userid').val(newsobj.user_id);
 						modal.find('#name').val(newsobj.name);
 						modal.find('#content').val(newsobj.content);	  									  				
 						modal.find('#createdat').val(newsobj.date);
 						console.log(newsobj);
-						return;
-  					}
-  				});
+						// return;
+  					// }
+  				// });
 				return;
   			}
   		});
@@ -799,22 +810,22 @@ function renderNewsModals(){
 	$(_NEWSTABLE_SELECTED_ID + 'modal-delete').on('show.bs.modal', function (event) {
 		var modal = $(this);
 		modal.find('.modal-body').html(newsForm);
-		modal.find('.modal-title').text('Read Entry ID: ' + _USERTABLE_SELECTED_ID)	 
-		modal.find('.modal-body').html(newsForm); 
+		modal.find('.modal-title').text('Read Entry ID: ' + _USERTABLE_SELECTED_ID)	
 		modal.find('.modal-body input').attr('readonly','readonly');
 		modal.find('#content').attr('readonly','readonly');
   		_NEWSTABLE_DATA.map(function(newsobj){
   			if(newsobj.id===_EXAMTABLE_SELECTED_ID){
-  				_USERTABLE_DATA.map(function(userobj){
-  					if (userobj.id===newsobj.userid) {
-  						modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
+  				// _USERTABLE_DATA.map(function(userobj){
+  					// if (userobj.id===newsobj.userid) {
+  						// modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
+						modal.find('#userid').val(newsobj.user_id);
 						modal.find('#name').val(newsobj.name);
 						modal.find('#content').val(newsobj.content);	  									  				
 						modal.find('#createdat').val(newsobj.date);
 						console.log(newsobj);
-						return;
-  					}
-  				});
+						// return;
+  					// }
+  				// });
 				return;
   			}
   		});
@@ -869,7 +880,7 @@ function renderNewsModals(){
 		function(isConfirm){
 		  if (isConfirm) {
 			var newNews = {
-				userid:$('#userid').val(),
+				// userid:$('#userid').val(),
 				name:$('#name').val(),
 				content:$('#content').val()
 				// date:$('#createdat').val()
@@ -881,7 +892,7 @@ function renderNewsModals(){
 		        data: {
 		        	action:'updatenews',
 		        	id:_EXAMTABLE_SELECTED_ID,
-		        	userid:newNews.userid,	        	
+		        	// userid:newNews.userid,	        	
 		        	name:newNews.name,	        	
 		        	content:newNews.content	        	
 		        	// date:newNews.date 	
@@ -959,15 +970,16 @@ function renderFeedbackModals(){
 		modal.find('#content').attr('readonly','readonly');
   		_FEEDBACKTABLE_DATA.map(function(feedbackobj){
   			if(feedbackobj.id===_EXAMTABLE_SELECTED_ID){
-  				_USERTABLE_DATA.map(function(userobj){
-  					if (userobj.id===feedbackobj.user_id) {
-  						modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
+  				// _USERTABLE_DATA.map(function(userobj){
+  				// 	if (userobj.id===feedbackobj.user_id) {
+  				// 		modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
+						modal.find('#userid').val(feedbackobj.user_id.toUpperCase());	  									  				
 						modal.find('#content').val(feedbackobj.content);	  									  				
 						modal.find('#createdat').val(feedbackobj.date);
-						console.log(feedbackobj);
-						return;
-  					}
-  				});
+						// console.log(feedbackobj);
+						// return;
+  				// 	}
+  				// });
 				return;
   			}
   		});
@@ -985,15 +997,16 @@ function renderFeedbackModals(){
 		modal.find('.modal-body').html(feedBackForms);	  
   		_FEEDBACKTABLE_DATA.map(function(feedbackobj){
   			if(feedbackobj.id===_EXAMTABLE_SELECTED_ID){
-  				_USERTABLE_DATA.map(function(userobj){
-  					if (userobj.id===feedbackobj.user_id) {
-  						modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
+  				// _USERTABLE_DATA.map(function(userobj){
+  				// 	if (userobj.id===feedbackobj.user_id) {
+  				// 		modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
+						modal.find('#userid').val(feedbackobj.user_id.toUpperCase());	  									  				
 						modal.find('#content').val(feedbackobj.content);	  									  				
 						modal.find('#createdat').val(feedbackobj.date);
-						console.log(feedbackobj);
-						return;
-  					}
-  				});
+						// console.log(feedbackobj);
+						// return;
+  				// 	}
+  				// });
 				return;
   			}
   		});
@@ -1008,15 +1021,16 @@ function renderFeedbackModals(){
 		modal.find('#content').attr('readonly','readonly');
   		_FEEDBACKTABLE_DATA.map(function(feedbackobj){
   			if(feedbackobj.id===_EXAMTABLE_SELECTED_ID){
-  				_USERTABLE_DATA.map(function(userobj){
-  					if (userobj.id===feedbackobj.user_id) {
-  						modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
+  				// _USERTABLE_DATA.map(function(userobj){
+  				// 	if (userobj.id===feedbackobj.user_id) {
+  				// 		modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
+						modal.find('#userid').val(feedbackobj.user_id.toUpperCase());	  									  				
 						modal.find('#content').val(feedbackobj.content);	  									  				
 						modal.find('#createdat').val(feedbackobj.date);
-						console.log(feedbackobj);
-						return;
-  					}
-  				});
+						// console.log(feedbackobj);
+						// return;
+  				// 	}
+  				// });
 				return;
   			}
   		});
@@ -1026,6 +1040,7 @@ function renderFeedbackModals(){
 		console.log("clicked");
 		var newFeedback = {
 			user_id:$('#userid').val(),
+			name:$('#name').val(),
 			content:$('#content').val()
 			// date:$('#createdat').val()
 		};
@@ -1044,6 +1059,7 @@ function renderFeedbackModals(){
 	    	// console.log(res);
 	    	$('#feedbackmodal-create').modal('hide');
 	    	$('#userid').val("");
+	    	$('#name').val("");
 	    	$('#content').val("");$('#createdat').val("");
 	    	$('#createdat').val("");
 	    	setTimeout(function(){
@@ -1070,7 +1086,8 @@ function renderFeedbackModals(){
 		function(isConfirm){
 		  if (isConfirm) {
 			var newFeedback = {
-				user_id:$('#userid').val(),
+				// user_id:$('#userid').val(),
+				name:$('#name').val(),
 				content:$('#content').val()
 				// date:$('#createdat').val()
 			};
@@ -1081,7 +1098,7 @@ function renderFeedbackModals(){
 		        data: {
 		        	action:'updatefeedback',
 		        	id:_EXAMTABLE_SELECTED_ID,
-		        	user_id:newFeedback.user_id,	        	
+		        	// user_id:newFeedback.user_id,	        	
 		        	name:newFeedback.name,	        	
 		        	content:newFeedback.content	        	
 		        	// date:newFeedback.date 	
@@ -1090,6 +1107,7 @@ function renderFeedbackModals(){
 		    	// console.log(res);
 		    	$('#feedbackmodal-update').modal('hide');
 		    	$('#userid').val("");
+		    	$('#name').val("");
 		    	$('#content').val("");$('#createdat').val("");
 		    	$('#createdat').val("");
 		    	setTimeout(function(){
@@ -1152,23 +1170,23 @@ function renderFeedbackModals(){
 function renderGuidelinesModals(){
 	$(_GUIDELINESTABLE_SELECTED_ID + 'modal-read').on('show.bs.modal', function (event) {
 		console.log("I'm here " + _EXAMTABLE_SELECTED_ID);
-		var modal = $(this);
-		modal.find('.modal-title').text('Read Entry ID: ' + _USERTABLE_SELECTED_ID);	  
+		var modal = $(this);	  
 		modal.find('.modal-body').html(guidelinesForm);
+		modal.find('.modal-title').text('Read Entry ID: ' + _USERTABLE_SELECTED_ID);
 		modal.find('.modal-body input').attr('readonly','readonly');
 		modal.find('#content').attr('readonly','readonly');
   		_GUIDELINESTABLE_DATA.map(function(guidelinesobj){
   			if(guidelinesobj.id===_EXAMTABLE_SELECTED_ID){
-				_USERTABLE_DATA.map(function(userobj){
-					if (userobj.id===guidelinesobj.user_id) {
-						modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
-						modal.find('#subjectid').val(subjectobj.name);	  									  				
+				// _USERTABLE_DATA.map(function(userobj){
+					// if (userobj.id===guidelinesobj.user_id) {
+						// modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
+						modal.find('#userid').val(guidelinesobj.user_id.toUpperCase());	  									  				
 						modal.find('#subjectstopass').val(guidelinesobj.subjects_toPass);	  									  				
 						modal.find('#createdat').val(guidelinesobj.date);
 						console.log(guidelinesobj);
-						return;
-					}
-				});
+						// return;
+					// }
+				// });
 				return;
   			}
   		});
@@ -1177,6 +1195,11 @@ function renderGuidelinesModals(){
 	$(_GUIDELINESTABLE_SELECTED_ID + 'modal-create').on('show.bs.modal', function (event) {
 		var modal = $(this);
 		modal.find('.modal-body').html(guidelinesForm);
+		// _SUBJECTTABLE_DATA.map(function(subjectobj){
+		// 	// modal.find('.modal-body #createdat').val(Date.now());
+		// 	modal.find('#createdat').val(new Date().getTime("Y-m-d H:i:s")).attr('readonly','readonly');
+  //           modal.find('#subjectid').append($('<option>').text(subjectobj.name).attr('value', subjectobj.id));
+		// });
 	});
 
 	$(_GUIDELINESTABLE_SELECTED_ID + 'modal-update').on('show.bs.modal', function (event) {
@@ -1184,18 +1207,20 @@ function renderGuidelinesModals(){
 		modal.find('.modal-body').html(guidelinesForm);
 		modal.find('.modal-title').text('Edit Entry ID: ' + _USERTABLE_SELECTED_ID);	  
 		modal.find('.modal-body').html(guidelinesForm);
+		modal.find('#userid').attr('readonly','readonly');
   		_GUIDELINESTABLE_DATA.map(function(guidelinesobj){
   			if(guidelinesobj.id===_EXAMTABLE_SELECTED_ID){
-				_USERTABLE_DATA.map(function(userobj){
-					if (userobj.id===guidelinesobj.user_id) {
-						modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
-						modal.find('#subjectid').val(subjectobj.name);	  									  				
+				// _USERTABLE_DATA.map(function(userobj){
+					// if (userobj.id===guidelinesobj.user_id) {
+						// modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
+						guidelinesobj.subjects_toPass=parseInt(guidelinesobj.subjects_toPass);	
+						modal.find('#userid').val(guidelinesobj.user_id.toUpperCase());	  									  				
 						modal.find('#subjectstopass').val(guidelinesobj.subjects_toPass);	  									  				
 						modal.find('#createdat').val(guidelinesobj.date);
 						console.log(guidelinesobj);
-						return;
-					}
-				});
+						// return;
+					// }
+				// });
 				return;
   			}
   		});
@@ -1210,16 +1235,16 @@ function renderGuidelinesModals(){
 		modal.find('#content').attr('readonly','readonly');
   		_GUIDELINESTABLE_DATA.map(function(guidelinesobj){
   			if(guidelinesobj.id===_EXAMTABLE_SELECTED_ID){
-				_USERTABLE_DATA.map(function(userobj){
-					if (userobj.id===guidelinesobj.user_id) {
-						modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
-						modal.find('#subjectid').val(subjectobj.name);	  									  				
+				// _USERTABLE_DATA.map(function(userobj){
+				// 	if (userobj.id===guidelinesobj.user_id) {
+				// 		modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
+						modal.find('#userid').val(guidelinesobj.user_id.toUpperCase());	  									  				
 						modal.find('#subjectstopass').val(guidelinesobj.subjects_toPass);	  									  				
 						modal.find('#createdat').val(guidelinesobj.date);
-						console.log(guidelinesobj);
-						return;
-					}
-				});
+						// console.log(guidelinesobj);
+				// 		return;
+				// 	}
+				// });
 				return;
   			}
   		});
@@ -1272,7 +1297,7 @@ function renderGuidelinesModals(){
 		function(isConfirm){
 		  if (isConfirm) {
 			var newGuidelines = {
-				user_id:$('#userid').val(),
+				// user_id:$('#userid').val(),
 				subjects_toPass:$('#subjectstopass').val()
 				// date:$('#createdat').val()
 			};
@@ -1281,13 +1306,14 @@ function renderGuidelinesModals(){
 		        method: "POST",
 		        url: "../app/models/guidelines.php",
 		        data: {
-		        	action:'createguidelines',
-		        	user_id:newGuidelines.user_id,	            	
+		        	action:'updateguidelines',
+		        	id: _EXAMTABLE_SELECTED_ID,
+		        	// user_id:newGuidelines.user_id,	            	
 		        	subjects_toPass:newGuidelines.subjects_toPass	        	
 		        	// date:newGuidelines.date 	
 		        }
 		    }).done(function(res){
-		    	// console.log(res);
+		    	console.log(res);
 		    	$('#guidelinesmodal-update').modal('hide');
 		    	$('#userid').val("");$('#subjectstopass').val("");
 		    	$('#createdat').val("");
@@ -1352,7 +1378,7 @@ function renderTopicModals(){
 	$(_TOPICTABLE_SELECTED_ID + 'modal-read').on('show.bs.modal', function (event) {
 		console.log("I'm here " + _EXAMTABLE_SELECTED_ID);
 		var modal = $(this);
-		modal.find('.modal-title').text('Read Entry ID: ' + _USERTABLE_SELECTED_ID)	  
+		modal.find('.modal-title').text('Read Entry ID: ' + _USERTABLE_SELECTED_ID);	  
 		modal.find('.modal-body').html(topicForm);
 		modal.find('.modal-body input').attr('readonly','readonly');
 		modal.find('.modal-body select').attr('disabled','disabled');
@@ -1360,24 +1386,24 @@ function renderTopicModals(){
   			if(topicobj.id===_EXAMTABLE_SELECTED_ID){
   				_SUBJECTTABLE_DATA.map(function(subjectobj){
   					$('#subjectid').append($('<option>').text(subjectobj.name).attr('value', subjectobj.id));
-  					if (subjectobj.id===topicobj.subject_id) {
-  						_USERTABLE_DATA.map(function(userobj){
-		  					if (userobj.id===topicobj.user_id) {
-		  						modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
+  					// if (subjectobj.id===topicobj.subject_id) {
+  						// _USERTABLE_DATA.map(function(userobj){
+		  					// if (userobj.id===topicobj.user_id) {
+		  						// modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
 		  						$("#subjectid option").each(function(i){
-							        if (topicobj.subject_id==this.value) {
+							        if (topicobj.subject_id==this.text) {
 				  						$(this).attr("selected","selected");
 				  					}
 							    });
-								// modal.find('#subjectid').val(subjectobj.name);	  									  				
+								modal.find('#userid').val(topicobj.user_id.toUpperCase());	  									  				
 								modal.find('#name').val(topicobj.name);	  									  				
 								modal.find('#createdat').val(topicobj.date);
 								console.log(topicobj);
-								return;
-		  					}
-		  				});
-  						return;
-  					}
+								// return;
+		  					// }
+		  				// });
+  						// return;
+  					// }
   				});
 				return;
   			}
@@ -1387,6 +1413,7 @@ function renderTopicModals(){
 	$(_TOPICTABLE_SELECTED_ID + 'modal-create').on('show.bs.modal', function (event) {
 		var modal = $(this);
 		modal.find('.modal-body').html(topicForm);
+		modal.find('#userid').attr('readonly','readonly');
 		_SUBJECTTABLE_DATA.map(function(subjectobj){
 			// modal.find('.modal-body #createdat').val(Date.now());
 			modal.find('#createdat').val(new Date().getTime("Y-m-d H:i:s")).attr('readonly','readonly');
@@ -1397,31 +1424,33 @@ function renderTopicModals(){
 	$(_TOPICTABLE_SELECTED_ID + 'modal-update').on('show.bs.modal', function (event) {
 		var modal = $(this);
 		modal.find('.modal-body').html(topicForm);
-		modal.find('.modal-title').text('Read Entry ID: ' + _USERTABLE_SELECTED_ID)	  
-		modal.find('.modal-body').html(topicForm);
+		modal.find('.modal-title').text('Read Entry ID: ' + _USERTABLE_SELECTED_ID);  
+		_SUBJECTTABLE_DATA.map(function(subjectobj){
+			modal.find('#subjectid').append($('<option>').text(subjectobj.name).attr('value', subjectobj.id));
+		});
   		_TOPICTABLE_DATA.map(function(topicobj){
   			if(topicobj.id===_EXAMTABLE_SELECTED_ID){
-  				_SUBJECTTABLE_DATA.map(function(subjectobj){
-  					$('#subjectid').append($('<option>').text(subjectobj.name).attr('value', subjectobj.id));
-  					if (subjectobj.id===topicobj.subject_id) {
-  						_USERTABLE_DATA.map(function(userobj){
-		  					if (userobj.id===topicobj.user_id) {
-		  						modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
+  				// _SUBJECTTABLE_DATA.map(function(subjectobj){
+  					// $('#subjectid').append($('<option>').text(subjectobj.name).attr('value', subjectobj.id));
+  					// if (subjectobj.id===topicobj.subject_id) {
+  						// _USERTABLE_DATA.map(function(userobj){
+		  					// if (userobj.id===topicobj.user_id) {
+		  						// modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
 		  						$("#subjectid option").each(function(i){
-							        if (topicobj.subject_id==this.value) {
+							        if (topicobj.subject_id==this.text) {
 				  						$(this).attr("selected","selected");
 				  					}
 							    });
-								// modal.find('#subjectid').val(subjectobj.name);	  									  				
+								modal.find('#userid').val(topicobj.user_id.toUpperCase());	  									  				
 								modal.find('#name').val(topicobj.name);	  									  				
 								modal.find('#createdat').val(topicobj.date);
 								console.log(topicobj);
-								return;
-		  					}
-		  				});
-  						return;
-  					}
-  				});
+								// return;
+		  					// }
+		  				// });
+  						// return;
+  					// }
+  				// });
 				return;
   			}
   		});
@@ -1431,32 +1460,33 @@ function renderTopicModals(){
 		var modal = $(this);
 		modal.find('.modal-body').html(topicForm);
 		modal.find('.modal-title').text('Read Entry ID: ' + _USERTABLE_SELECTED_ID)	  
-		modal.find('.modal-body').html(topicForm);
 		modal.find('.modal-body input').attr('readonly','readonly');
 		modal.find('.modal-body select').attr('disabled','disabled');
+		_SUBJECTTABLE_DATA.map(function(subjectobj){
+			modal.find('#subjectid').append($('<option>').text(subjectobj.name).attr('value', subjectobj.id));
+		});
   		_TOPICTABLE_DATA.map(function(topicobj){
   			if(topicobj.id===_EXAMTABLE_SELECTED_ID){
-  				_SUBJECTTABLE_DATA.map(function(subjectobj){
-  					$('#subjectid').append($('<option>').text(subjectobj.name).attr('value', subjectobj.id));
-  					if (subjectobj.id===topicobj.subject_id) {
-  						_USERTABLE_DATA.map(function(userobj){
-		  					if (userobj.id===topicobj.user_id) {
-		  						modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
+  				
+  					// if (subjectobj.id===topicobj.subject_id) {
+  						// _USERTABLE_DATA.map(function(userobj){
+		  					// if (userobj.id===topicobj.user_id) {
+		  						// modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
 		  						$("#subjectid option").each(function(i){
-							        if (topicobj.subject_id==this.value) {
+							        if (topicobj.subject_id==this.text) {
 				  						$(this).attr("selected","selected");
 				  					}
 							    });
-								// modal.find('#subjectid').val(subjectobj.name);	  									  				
+								modal.find('#userid').val(topicobj.user_id.toUpperCase());	  									  				
 								modal.find('#name').val(topicobj.name);	  									  				
 								modal.find('#createdat').val(topicobj.date);
 								console.log(topicobj);
-								return;
-		  					}
-		  				});
-  						return;
-  					}
-  				});
+								// return;
+		  					// }
+		  				// });
+  						// return;
+  					// }
+  				// });
 				return;
   			}
   		});
