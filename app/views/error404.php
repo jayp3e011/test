@@ -7,7 +7,7 @@
 
       <p class="text-gray">
         We could not find the page you were looking for.
-        Meanwhile, you may <a href="<?php $_SERVER['PHP_SELF'] ?>">return to dashboard</a>.
+        Meanwhile, you may <a href="<?php echo dirname($_SERVER['PHP_SELF']) . '/index.php' ?>">return to main page</a>.
       </p>
       <hr/>
       <p class="text-gray">Try another page!</p>

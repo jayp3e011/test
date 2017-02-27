@@ -1,3 +1,4 @@
+<? session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,8 +78,16 @@
           if($_GET['page'] == "dashboard"){
             $page_url = "../app/views/dashboard.php";
           } 
-          else if($_GET['page'] == "login"){
-            $page_url = "../app/views/login.php";
+          else if($_GET['page'] == "login"){            
+            if(isset($_SESSION['_ISTOKENVALID'])){
+              $page_url = "../app/views/dashboard.php";
+            }
+            else{
+              $page_url = "../app/views/login.php";
+            }
+          }     
+          else if($_GET['page'] == "logout"){
+            $page_url = "../app/controllers/util/logout.php";
           }          
           else if($_GET['page'] == "register"){
             $page_url = "../app/views/register.php";
@@ -95,7 +104,17 @@
           require_once($page_url);
         }
         else{
-          require_once("../app/views/login.php");
+          if(isset($_SESSION['_ISTOKENVALID'])){
+            if($_SESSION['_ISTOKENVALID']){
+              require_once("../app/views/dashboard.php.php");
+            }          
+            else{
+              require_once("../app/views/login.php");  
+            }
+          }                   
+          else{
+            require_once("../app/views/login.php");  
+          }
         }
       ?>        
 

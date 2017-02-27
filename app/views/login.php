@@ -1,3 +1,10 @@
+<? 
+  if(isset($_SESSION['_isTokenValid'])){
+    if($_SESSION['_isTokenValid']){
+      header("Location: /test/public/?page=error");
+    }
+  }
+?>
 <div class="content-wrapper background">
   <div class="container layer">
     <div class="login-box">

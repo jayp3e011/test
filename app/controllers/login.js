@@ -18,8 +18,8 @@ $(function(){
 	    			console.log("Welcome admin!");
 	    		}
 	    		else{
-	    			console.log("Welcome student!");
-	    			window.location = "/test/public/?page=dashboard";
+	    			console.log("Welcome student!");	    			
+	    			window.location = "/test/app/controllers/util/validToken.php";
 	    		}
 	    	}
 	    	else{
