@@ -1,14 +1,14 @@
 <?php
-	define('HOST', 'localhost');
-	define('USER', 'root');
-	define('PASS', '');
-	define('DBSE', 'test');
+	define('HOST1', 'localhost');
+	define('USER1', 'root');
+	define('PASS1', '');
+	define('DBSE1', 'test');
 	// define('PORT', '');
 
-	define('HOST1', 'sql6.freemysqlhosting.net');
-	define('USER1', 'sql6161771');
-	define('PASS1', 'BzWAKbzp8a');
-	define('DBSE1', 'sql6161771');
+	define('HOST', 'sql6.freemysqlhosting.net');
+	define('USER', 'sql6161771');
+	define('PASS', 'BzWAKbzp8a');
+	define('DBSE', 'sql6161771');
 	// define('PORT1', '3306');
 
 	$link = mysqli_connect(HOST, USER, PASS, DBSE);
