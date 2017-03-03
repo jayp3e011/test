@@ -60,7 +60,7 @@
               <!-- <li class=""><a href="?page=login">Login</a></li>
               <li><a href="?page=register">Register</a></li>
               <li><a href="?page=user">User</a></li> -->
-              <li><a href="?page=exam">Exam</a></li>
+              <!-- <li><a href="?page=exam">Exam</a></li> -->
               <!-- <li><a href="?page=subject">Subject</a></li>
               <li><a href="?page=question">Question</a></li>
               <li><a href="?page=topic">Topic</a></li>
