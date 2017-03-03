@@ -60,7 +60,7 @@
               <!-- <li class=""><a href="?page=login">Login</a></li>
               <li><a href="?page=register">Register</a></li>
               <li><a href="?page=user">User</a></li> -->
-              <!-- <li><a href="?page=exam">Exam</a></li> -->
+              <li><a href="?page=exam">Exam</a></li>
               <!-- <li><a href="?page=subject">Subject</a></li>
               <li><a href="?page=question">Question</a></li>
               <li><a href="?page=topic">Topic</a></li>
@@ -147,7 +147,7 @@
             <div class="help-block with-errors"></div>
           </div>
           <div class="form-group has-feedback">
-            <input type="password" id="password" data-minlength="1" name="password" placeholder="Password" class="form-control input-lg" required />
+            <input type="password" id="password" data-minlength="6" name="password" placeholder="Password" class="form-control input-lg" required />
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             <div class="help-block">Minimum of 6 characters</div>
           </div>
@@ -185,7 +185,7 @@
   <script src="plugins/fastclick/fastclick.js"></script>
    <script src="plugins/sweetalert/sweetalert.min.js"></script>
   <script src="dist/js/app.min.js"></script>
-    <script src="dist/js/script.js"></script>
+    <script src="../app/controllers/script.js"></script>
   <script src="dist/js/demo.js"></script>
 
 </body>

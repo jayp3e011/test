@@ -104,20 +104,10 @@ let userForm = `
 			</select>
 		</div>
 		<div class="form-group has-feedback">
-			<label for="recipient-name" class="control-label">Created at:</label>
-			<input type="date" class="form-control" id="createdat" required>
-			<span class="glyphicon glyphicon-user form-control-feedback"></span>
-		</div>
-		<div class="form-group has-feedback">
 			<label for="recipient-name" class="control-label">Password:</label>
 			<input type="password" data-minlength="6" class="form-control" placeholder="Password" id="password" required>
 			<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 			<div class="help-block">Minimum of 6 characters</div>
-		</div>
-		<div class="form-group has-feedback">
-			<input type="password" class="form-control" placeholder="Retype password" id="confirmpassword" data-match="#password" data-match-error="Password mismatch">
-			<span class="glyphicon glyphicon-log-in form-control-feedback"></span>
-			<div class="help-block with-errors"></div>
 		</div>
 	</form>
 `;
@@ -137,11 +127,6 @@ let topicForm = `
 		<div class="form-group has-feedback">
 			<label for="recipient-name" class="control-label">Name:</label>
 			<input type="text" class="form-control" placeholder="Enter title" id="name" required>
-			<span class="glyphicon glyphicon-topic form-control-feedback"></span>
-		</div>
-		<div class="form-group has-feedback">
-			<label for="recipient-name" class="control-label">Date:</label>
-			<input type="datepicker" class="form-control" id="createdat" required>
 			<span class="glyphicon glyphicon-topic form-control-feedback"></span>
 		</div>
 	</form>
@@ -200,11 +185,6 @@ let newsForm = `
 			<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 			<div class="help-block with-errors"></div>
 		</div>
-		<div class="form-group has-feedback">
-			<label for="recipient-name" class="control-label">Created at:</label>
-			<input type="datepicker" class="form-control" id="createdat" required>
-			<span class="glyphicon glyphicon-news form-control-feedback"></span>
-		</div>
 	</form>
 `;
 let guidelinesForm = `
@@ -218,11 +198,6 @@ let guidelinesForm = `
 		<div class="form-group has-feedback">
 			<label for="recipient-name" class="control-label">No.of Subject to Pass:</label>
 			<input type="number" class="form-control" placeholder="Subjects to Pass" id="subjectstopass" required>
-			<span class="glyphicon glyphicon-guidelines form-control-feedback"></span>
-		</div>
-		<div class="form-group has-feedback">
-			<label for="recipient-name" class="control-label">Date:</label>
-			<input type="datepicker" class="form-control" id="createdat" required>
 			<span class="glyphicon glyphicon-guidelines form-control-feedback"></span>
 		</div>
 	</form>
@@ -251,11 +226,6 @@ let feedBackForms = `
 			<textarea class="form-control" placeholder="content" id="content" data-maxlength="255" data-error="not less than 255 characters" required></textarea>
 			<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 			<div class="help-block with-errors"></div>
-		</div>
-		<div class="form-group has-feedback">
-			<label for="recipient-name" class="control-label">Created at:</label>
-			<input type="datepicker" class="form-control" id="createdat" required>
-			<span class="glyphicon glyphicon-feedback form-control-feedback"></span>
 		</div>
 	</form>
 `;
@@ -619,7 +589,6 @@ function renderUserModals(){
 			email:$('#email').val(),
 			password:$('#password').val(),
 			isadmin:$('#isadmin').val()
-			// createdat:$('#createdat').val()
 		};
 		console.log(newUser);
 		$.ajax({
@@ -630,8 +599,7 @@ function renderUserModals(){
 	        	firstname:newUser.firstname,
 	        	lastname:newUser.lastname,	        	
 	        	email:newUser.email,	        	
-	        	password:newUser.password,	        	
-	        	// createdat:newUser.createdat,	        	
+	        	password:newUser.password,	             	
 	        	isadmin:newUser.isadmin     	
 	        }
 	    }).done(function(res){
@@ -670,7 +638,6 @@ function renderUserModals(){
 				email:$('#email').val(),
 				password:$('#password').val(),
 				isadmin:$('#isadmin').val()
-				// createdat:$('#createdat').val()
 			};
 			console.log(newUser);
 			$.ajax({
@@ -683,7 +650,6 @@ function renderUserModals(){
 		        	lastname:newUser.lastname,	        	
 		        	email:newUser.email,	        	
 		        	password:newUser.password,	        	
-		        	// createdat:newUser.createdat,	        	
 		        	isadmin:newUser.isadmin     	
 		        }
 		    }).done(function(res){
@@ -725,13 +691,7 @@ function renderUserModals(){
 		        url: "../app/models/user.php",
 		        data: {
 		        	action:'deleteuser',
-		        	id:_EXAMTABLE_SELECTED_ID
-		        	// firstname:newUser.firstname,
-		        	// lastname:newUser.lastname,	        	
-		        	// email:newUser.email,	        	
-		        	// password:newUser.password,	        	
-		        	// createdat:newUser.createdat,	        	
-		        	// isadmin:newUser.isadmin     	
+		        	id:_EXAMTABLE_SELECTED_ID	
 		        }
 		    }).done(function(res){
 		    	// console.log(res);
@@ -764,17 +724,11 @@ function renderNewsModals(){
 		modal.find('#content').attr('readonly','readonly');
   		_NEWSTABLE_DATA.map(function(newsobj){
   			if(newsobj.id===_EXAMTABLE_SELECTED_ID){
-  				// _USERTABLE_DATA.map(function(userobj){
-  					// if (userobj.id===newsobj.userid) {
-  						// modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
-						modal.find('#userid').val(newsobj.user_id);
-						modal.find('#name').val(newsobj.name);
-						modal.find('#content').val(newsobj.content);	  									  				
-						modal.find('#createdat').val(newsobj.date);
-						console.log(newsobj);
-						// return;
-  					// }
-  				// });
+				modal.find('#userid').val(newsobj.user_id);
+				modal.find('#name').val(newsobj.name);
+				modal.find('#content').val(newsobj.content);	  									  				
+				modal.find('#createdat').val(newsobj.date);
+				// console.log(newsobj);
 				return;
   			}
   		});
@@ -791,17 +745,11 @@ function renderNewsModals(){
 		modal.find('.modal-title').text('Edit Entry ID: ' + _USERTABLE_SELECTED_ID);
   		_NEWSTABLE_DATA.map(function(newsobj){
   			if(newsobj.id===_EXAMTABLE_SELECTED_ID){
-  				// _USERTABLE_DATA.map(function(userobj){
-  					// if (userobj.id===newsobj.userid) {
-  						// modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
-						modal.find('#userid').val(newsobj.user_id);
-						modal.find('#name').val(newsobj.name);
-						modal.find('#content').val(newsobj.content);	  									  				
-						modal.find('#createdat').val(newsobj.date);
-						console.log(newsobj);
-						// return;
-  					// }
-  				// });
+				modal.find('#userid').val(newsobj.user_id);
+				modal.find('#name').val(newsobj.name);
+				modal.find('#content').val(newsobj.content);	  									  				
+				modal.find('#createdat').val(newsobj.date);
+				// console.log(newsobj);
 				return;
   			}
   		});
@@ -815,17 +763,11 @@ function renderNewsModals(){
 		modal.find('#content').attr('readonly','readonly');
   		_NEWSTABLE_DATA.map(function(newsobj){
   			if(newsobj.id===_EXAMTABLE_SELECTED_ID){
-  				// _USERTABLE_DATA.map(function(userobj){
-  					// if (userobj.id===newsobj.userid) {
-  						// modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
-						modal.find('#userid').val(newsobj.user_id);
-						modal.find('#name').val(newsobj.name);
-						modal.find('#content').val(newsobj.content);	  									  				
-						modal.find('#createdat').val(newsobj.date);
-						console.log(newsobj);
-						// return;
-  					// }
-  				// });
+				modal.find('#userid').val(newsobj.user_id);
+				modal.find('#name').val(newsobj.name);
+				modal.find('#content').val(newsobj.content);	  									  				
+				modal.find('#createdat').val(newsobj.date);
+				// console.log(newsobj);
 				return;
   			}
   		});
@@ -837,7 +779,6 @@ function renderNewsModals(){
 			userid:$('#userid').val(),
 			name:$('#name').val(),
 			content:$('#content').val()
-			// date:$('#createdat').val()
 		};
 		console.log(newNews);
 		$.ajax({
@@ -847,8 +788,7 @@ function renderNewsModals(){
 	        	action:'createnews',
 	        	userid:newNews.userid,	        	
 	        	name:newNews.name,	        	
-	        	content:newNews.content	        	
-	        	// date:newNews.date 	
+	        	content:newNews.content	   
 	        }
 	    }).done(function(res){
 	    	// console.log(res);
@@ -880,10 +820,8 @@ function renderNewsModals(){
 		function(isConfirm){
 		  if (isConfirm) {
 			var newNews = {
-				// userid:$('#userid').val(),
 				name:$('#name').val(),
 				content:$('#content').val()
-				// date:$('#createdat').val()
 			};
 			console.log(newNews);
 			$.ajax({
@@ -891,11 +829,9 @@ function renderNewsModals(){
 		        url: "../app/models/news.php",
 		        data: {
 		        	action:'updatenews',
-		        	id:_EXAMTABLE_SELECTED_ID,
-		        	// userid:newNews.userid,	        	
+		        	id:_EXAMTABLE_SELECTED_ID,     	
 		        	name:newNews.name,	        	
-		        	content:newNews.content	        	
-		        	// date:newNews.date 	
+		        	content:newNews.content	    
 		        }
 		    }).done(function(res){
 		    	console.log(res);
@@ -935,11 +871,7 @@ function renderNewsModals(){
 		        url: "../app/models/news.php",
 		        data: {
 		        	action:'deletenews',
-		        	id:_EXAMTABLE_SELECTED_ID
-		        	// userid:newNews.userid,	        	
-		        	// name:newNews.name,	        	
-		        	// content:newNews.content	        	
-		        	// date:newNews.date 	  	
+		        	id:_EXAMTABLE_SELECTED_ID  	
 		        }
 		    }).done(function(res){
 		    	// console.log(res);
@@ -970,16 +902,9 @@ function renderFeedbackModals(){
 		modal.find('#content').attr('readonly','readonly');
   		_FEEDBACKTABLE_DATA.map(function(feedbackobj){
   			if(feedbackobj.id===_EXAMTABLE_SELECTED_ID){
-  				// _USERTABLE_DATA.map(function(userobj){
-  				// 	if (userobj.id===feedbackobj.user_id) {
-  				// 		modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
-						modal.find('#userid').val(feedbackobj.user_id.toUpperCase());	  									  				
-						modal.find('#content').val(feedbackobj.content);	  									  				
-						modal.find('#createdat').val(feedbackobj.date);
-						// console.log(feedbackobj);
-						// return;
-  				// 	}
-  				// });
+				modal.find('#userid').val(feedbackobj.user_id.toUpperCase());	  									  				
+				modal.find('#content').val(feedbackobj.content);	  									  				
+				modal.find('#createdat').val(feedbackobj.date);
 				return;
   			}
   		});
@@ -997,16 +922,9 @@ function renderFeedbackModals(){
 		modal.find('.modal-body').html(feedBackForms);	  
   		_FEEDBACKTABLE_DATA.map(function(feedbackobj){
   			if(feedbackobj.id===_EXAMTABLE_SELECTED_ID){
-  				// _USERTABLE_DATA.map(function(userobj){
-  				// 	if (userobj.id===feedbackobj.user_id) {
-  				// 		modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
-						modal.find('#userid').val(feedbackobj.user_id.toUpperCase());	  									  				
-						modal.find('#content').val(feedbackobj.content);	  									  				
-						modal.find('#createdat').val(feedbackobj.date);
-						// console.log(feedbackobj);
-						// return;
-  				// 	}
-  				// });
+				modal.find('#userid').val(feedbackobj.user_id.toUpperCase());	  									  				
+				modal.find('#content').val(feedbackobj.content);	  									  				
+				modal.find('#createdat').val(feedbackobj.date);
 				return;
   			}
   		});
@@ -1021,16 +939,9 @@ function renderFeedbackModals(){
 		modal.find('#content').attr('readonly','readonly');
   		_FEEDBACKTABLE_DATA.map(function(feedbackobj){
   			if(feedbackobj.id===_EXAMTABLE_SELECTED_ID){
-  				// _USERTABLE_DATA.map(function(userobj){
-  				// 	if (userobj.id===feedbackobj.user_id) {
-  				// 		modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
-						modal.find('#userid').val(feedbackobj.user_id.toUpperCase());	  									  				
-						modal.find('#content').val(feedbackobj.content);	  									  				
-						modal.find('#createdat').val(feedbackobj.date);
-						// console.log(feedbackobj);
-						// return;
-  				// 	}
-  				// });
+				modal.find('#userid').val(feedbackobj.user_id.toUpperCase());	  									  				
+				modal.find('#content').val(feedbackobj.content);	  									  				
+				modal.find('#createdat').val(feedbackobj.date);
 				return;
   			}
   		});
@@ -1042,7 +953,6 @@ function renderFeedbackModals(){
 			user_id:$('#userid').val(),
 			name:$('#name').val(),
 			content:$('#content').val()
-			// date:$('#createdat').val()
 		};
 		console.log(newFeedback);
 		$.ajax({
@@ -1052,8 +962,7 @@ function renderFeedbackModals(){
 	        	action:'createfeedback',
 	        	user_id:newFeedback.user_id,	        	
 	        	name:newFeedback.name,	        	
-	        	content:newFeedback.content	        	
-	        	// date:newFeedback.date 	
+	        	content:newFeedback.content	    
 	        }
 	    }).done(function(res){
 	    	// console.log(res);
@@ -1086,10 +995,8 @@ function renderFeedbackModals(){
 		function(isConfirm){
 		  if (isConfirm) {
 			var newFeedback = {
-				// user_id:$('#userid').val(),
 				name:$('#name').val(),
 				content:$('#content').val()
-				// date:$('#createdat').val()
 			};
 			console.log(newFeedback);
 			$.ajax({
@@ -1097,11 +1004,9 @@ function renderFeedbackModals(){
 		        url: "../app/models/feedback.php",
 		        data: {
 		        	action:'updatefeedback',
-		        	id:_EXAMTABLE_SELECTED_ID,
-		        	// user_id:newFeedback.user_id,	        	
+		        	id:_EXAMTABLE_SELECTED_ID,       	
 		        	name:newFeedback.name,	        	
-		        	content:newFeedback.content	        	
-		        	// date:newFeedback.date 	
+		        	content:newFeedback.content	      
 		        }
 		    }).done(function(res){
 		    	// console.log(res);
@@ -1142,11 +1047,7 @@ function renderFeedbackModals(){
 		        url: "../app/models/feedback.php",
 		        data: {
 		        	action:'deletefeedback',
-		        	id:_EXAMTABLE_SELECTED_ID
-		        	// user_id:newFeedback.user_id,	        	
-		        	// name:newFeedback.name,	        	
-		        	// content:newFeedback.content,	        	
-		        	// date:newFeedback.date 	  	
+		        	id:_EXAMTABLE_SELECTED_ID	  	
 		        }
 		    }).done(function(res){
 		    	// console.log(res);
@@ -1177,16 +1078,10 @@ function renderGuidelinesModals(){
 		modal.find('#content').attr('readonly','readonly');
   		_GUIDELINESTABLE_DATA.map(function(guidelinesobj){
   			if(guidelinesobj.id===_EXAMTABLE_SELECTED_ID){
-				// _USERTABLE_DATA.map(function(userobj){
-					// if (userobj.id===guidelinesobj.user_id) {
-						// modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
-						modal.find('#userid').val(guidelinesobj.user_id.toUpperCase());	  									  				
-						modal.find('#subjectstopass').val(guidelinesobj.subjects_toPass);	  									  				
-						modal.find('#createdat').val(guidelinesobj.date);
-						console.log(guidelinesobj);
-						// return;
-					// }
-				// });
+				modal.find('#userid').val(guidelinesobj.user_id.toUpperCase());	  									  				
+				modal.find('#subjectstopass').val(guidelinesobj.subjects_toPass);	  									  				
+				modal.find('#createdat').val(guidelinesobj.date);
+				// console.log(guidelinesobj);
 				return;
   			}
   		});
@@ -1210,17 +1105,11 @@ function renderGuidelinesModals(){
 		modal.find('#userid').attr('readonly','readonly');
   		_GUIDELINESTABLE_DATA.map(function(guidelinesobj){
   			if(guidelinesobj.id===_EXAMTABLE_SELECTED_ID){
-				// _USERTABLE_DATA.map(function(userobj){
-					// if (userobj.id===guidelinesobj.user_id) {
-						// modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
-						guidelinesobj.subjects_toPass=parseInt(guidelinesobj.subjects_toPass);	
-						modal.find('#userid').val(guidelinesobj.user_id.toUpperCase());	  									  				
-						modal.find('#subjectstopass').val(guidelinesobj.subjects_toPass);	  									  				
-						modal.find('#createdat').val(guidelinesobj.date);
-						console.log(guidelinesobj);
-						// return;
-					// }
-				// });
+				guidelinesobj.subjects_toPass=parseInt(guidelinesobj.subjects_toPass);	
+				modal.find('#userid').val(guidelinesobj.user_id.toUpperCase());	  									  				
+				modal.find('#subjectstopass').val(guidelinesobj.subjects_toPass);	  									  				
+				modal.find('#createdat').val(guidelinesobj.date);
+				// console.log(guidelinesobj);
 				return;
   			}
   		});
@@ -1235,16 +1124,9 @@ function renderGuidelinesModals(){
 		modal.find('#content').attr('readonly','readonly');
   		_GUIDELINESTABLE_DATA.map(function(guidelinesobj){
   			if(guidelinesobj.id===_EXAMTABLE_SELECTED_ID){
-				// _USERTABLE_DATA.map(function(userobj){
-				// 	if (userobj.id===guidelinesobj.user_id) {
-				// 		modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
-						modal.find('#userid').val(guidelinesobj.user_id.toUpperCase());	  									  				
-						modal.find('#subjectstopass').val(guidelinesobj.subjects_toPass);	  									  				
-						modal.find('#createdat').val(guidelinesobj.date);
-						// console.log(guidelinesobj);
-				// 		return;
-				// 	}
-				// });
+				modal.find('#userid').val(guidelinesobj.user_id.toUpperCase());	  									  				
+				modal.find('#subjectstopass').val(guidelinesobj.subjects_toPass);	  									  				
+				modal.find('#createdat').val(guidelinesobj.date);
 				return;
   			}
   		});
@@ -1256,7 +1138,6 @@ function renderGuidelinesModals(){
 		var newGuidelines = {
 			user_id:$('#userid').val(),
 			subjects_toPass:$('#subjectstopass').val()
-			// date:$('#createdat').val()
 		};
 		console.log(newGuidelines);
 		$.ajax({
@@ -1265,8 +1146,7 @@ function renderGuidelinesModals(){
 	        data: {
 	        	action:'createguidelines',
 	        	user_id:newGuidelines.user_id,	            	
-	        	subjects_toPass:newGuidelines.subjects_toPass	        	
-	        	// date:newGuidelines.date 	
+	        	subjects_toPass:newGuidelines.subjects_toPass	   
 	        }
 	    }).done(function(res){
 	    	// console.log(res);
@@ -1349,10 +1229,7 @@ function renderGuidelinesModals(){
 		        url: "../app/models/guidelines.php",
 		        data: {
 		        	action:'deleteguidelines',
-		        	id:_EXAMTABLE_SELECTED_ID,
-		        	// user_id:newGuidelines.user_id,	            	
-		        	// subjects_toPass:newGuidelines.subjects_toPass        	
-		        	// date:newGuidelines.date   	
+		        	id:_EXAMTABLE_SELECTED_ID,	
 		        }
 		    }).done(function(res){
 		    	// console.log(res);
@@ -1386,24 +1263,15 @@ function renderTopicModals(){
   			if(topicobj.id===_EXAMTABLE_SELECTED_ID){
   				_SUBJECTTABLE_DATA.map(function(subjectobj){
   					$('#subjectid').append($('<option>').text(subjectobj.name).attr('value', subjectobj.id));
-  					// if (subjectobj.id===topicobj.subject_id) {
-  						// _USERTABLE_DATA.map(function(userobj){
-		  					// if (userobj.id===topicobj.user_id) {
-		  						// modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
-		  						$("#subjectid option").each(function(i){
-							        if (topicobj.subject_id==this.text) {
-				  						$(this).attr("selected","selected");
-				  					}
-							    });
-								modal.find('#userid').val(topicobj.user_id.toUpperCase());	  									  				
-								modal.find('#name').val(topicobj.name);	  									  				
-								modal.find('#createdat').val(topicobj.date);
-								console.log(topicobj);
-								// return;
-		  					// }
-		  				// });
-  						// return;
-  					// }
+						$("#subjectid option").each(function(i){
+				        if (topicobj.subject_id==this.text) {
+	  						$(this).attr("selected","selected");
+	  					}
+				    });
+					modal.find('#userid').val(topicobj.user_id.toUpperCase());	  									  				
+					modal.find('#name').val(topicobj.name);	  									  				
+					modal.find('#createdat').val(topicobj.date);
+					// console.log(topicobj);
   				});
 				return;
   			}
@@ -1414,6 +1282,7 @@ function renderTopicModals(){
 		var modal = $(this);
 		modal.find('.modal-body').html(topicForm);
 		modal.find('#userid').attr('readonly','readonly');
+		modal.find('#userid').val(`<?php echo $_SESSION['id']; ?>`);
 		_SUBJECTTABLE_DATA.map(function(subjectobj){
 			// modal.find('.modal-body #createdat').val(Date.now());
 			modal.find('#createdat').val(new Date().getTime("Y-m-d H:i:s")).attr('readonly','readonly');
@@ -1430,27 +1299,15 @@ function renderTopicModals(){
 		});
   		_TOPICTABLE_DATA.map(function(topicobj){
   			if(topicobj.id===_EXAMTABLE_SELECTED_ID){
-  				// _SUBJECTTABLE_DATA.map(function(subjectobj){
-  					// $('#subjectid').append($('<option>').text(subjectobj.name).attr('value', subjectobj.id));
-  					// if (subjectobj.id===topicobj.subject_id) {
-  						// _USERTABLE_DATA.map(function(userobj){
-		  					// if (userobj.id===topicobj.user_id) {
-		  						// modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
-		  						$("#subjectid option").each(function(i){
-							        if (topicobj.subject_id==this.text) {
-				  						$(this).attr("selected","selected");
-				  					}
-							    });
-								modal.find('#userid').val(topicobj.user_id.toUpperCase());	  									  				
-								modal.find('#name').val(topicobj.name);	  									  				
-								modal.find('#createdat').val(topicobj.date);
-								console.log(topicobj);
-								// return;
-		  					// }
-		  				// });
-  						// return;
-  					// }
-  				// });
+					$("#subjectid option").each(function(i){
+			        if (topicobj.subject_id==this.text) {
+  						$(this).attr("selected","selected");
+  					}
+			    });
+				modal.find('#userid').val(topicobj.user_id.toUpperCase());	  									  				
+				modal.find('#name').val(topicobj.name);	  									  				
+				modal.find('#createdat').val(topicobj.date);
+				// console.log(topicobj);
 				return;
   			}
   		});
@@ -1467,26 +1324,15 @@ function renderTopicModals(){
 		});
   		_TOPICTABLE_DATA.map(function(topicobj){
   			if(topicobj.id===_EXAMTABLE_SELECTED_ID){
-  				
-  					// if (subjectobj.id===topicobj.subject_id) {
-  						// _USERTABLE_DATA.map(function(userobj){
-		  					// if (userobj.id===topicobj.user_id) {
-		  						// modal.find('#userid').val(userobj.firstname.toUpperCase()+' '+userobj.lastname.toUpperCase());
-		  						$("#subjectid option").each(function(i){
-							        if (topicobj.subject_id==this.text) {
-				  						$(this).attr("selected","selected");
-				  					}
-							    });
-								modal.find('#userid').val(topicobj.user_id.toUpperCase());	  									  				
-								modal.find('#name').val(topicobj.name);	  									  				
-								modal.find('#createdat').val(topicobj.date);
-								console.log(topicobj);
-								// return;
-		  					// }
-		  				// });
-  						// return;
-  					// }
-  				// });
+  				$("#subjectid option").each(function(i){
+			        if (topicobj.subject_id==this.text) {
+  						$(this).attr("selected","selected");
+  					}
+			    });
+				modal.find('#userid').val(topicobj.user_id.toUpperCase());	  									  				
+				modal.find('#name').val(topicobj.name);	  									  				
+				modal.find('#createdat').val(topicobj.date);
+				// console.log(topicobj);
 				return;
   			}
   		});
@@ -1498,7 +1344,6 @@ function renderTopicModals(){
 			user_id:$('#userid').val(),
 			subject_id:$('#subjectid').val(),
 			name:$('#name').val()
-			// date:$('#createdat').val()
 		};
 		console.log(newTopic);
 		$.ajax({
@@ -1508,8 +1353,7 @@ function renderTopicModals(){
 	        	action:'createtopic',
 	        	user_id:newTopic.user_id,	        	
 	        	subject_id:newTopic.subject_id,	        	
-	        	name:newTopic.name        	
-	        	// date:newTopic.date 	
+	        	name:newTopic.name        
 	        }
 	    }).done(function(res){
 	    	console.log(res);
@@ -1543,7 +1387,6 @@ function renderTopicModals(){
 				user_id:$('#userid').val(),
 				subject_id:$('#subjectid').val(),
 				name:$('#name').val()
-				// date:$('#createdat').val()
 			};
 			console.log(newTopic);
 			$.ajax({
@@ -1554,8 +1397,7 @@ function renderTopicModals(){
 		        	id:_EXAMTABLE_SELECTED_ID,
 		        	user_id:newTopic.user_id,	        	
 		        	subject_id:newTopic.subject_id,	        	
-		        	name:newTopic.name	        	
-		        	// date:newTopic.date 	
+		        	name:newTopic.name	
 		        }
 		    }).done(function(res){
 		    	console.log(res);
@@ -1594,7 +1436,6 @@ function renderTopicModals(){
 				user_id:$('#userid').val(),
 				subject_id:$('#subjectid').val(),
 				name:$('#name').val(),
-				// date:$('#createdat').val()
 			};
 		    $.ajax({
 		        method: "POST",
@@ -1602,10 +1443,6 @@ function renderTopicModals(){
 		        data: {
 		        	action:'deletetopic',
 		        	id:_EXAMTABLE_SELECTED_ID,
-		        	// user_id:newTopic.user_id,	        	
-		        	// subject_id:newTopic.subject_id,	        	
-		        	// name:newTopic.name	        	
-		        	// date:newTopic.date 	 	
 		        }
 		    }).done(function(res){
 		    	// console.log(res);
