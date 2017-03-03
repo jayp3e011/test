@@ -1,7 +1,7 @@
 function doRenderTable(id){
 	$.ajax({
         method: "POST",
-        url: "../app/models/user.php"
+        url: "./app/models/user.php"
     }).done(function(userdata){
     	_USERTABLE_DATA = JSON.parse(userdata);
     	$.ajax({
@@ -11,7 +11,7 @@ function doRenderTable(id){
     		_SUBJECTTABLE_DATA = JSON.parse(subjectdata);
             $.ajax({
                 method: "POST",
-                url: "../app/models/topic.php"
+                url: "./app/models/topic.php"
             }).done(function(topicdata){
                 _TOPICTABLE_DATA = JSON.parse(topicdata);
                 // console.log(topicdata);

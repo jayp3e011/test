@@ -1,5 +1,5 @@
  <?php
-  include_once('../app/controllers/php/dbconnect.php');
+  include_once(getcwd().'/app/controllers/php/dbconnect.php');
   if (!isset($_SESSION['level'])==1) {
     header('Location: /public');
   }
@@ -11,36 +11,36 @@
           $titlepage = '| Admin';
           if(isset($_GET['page'])){
             if($_GET['page'] == "exam"){
-              $page_url = "../app/views/exam.php";
+              $page_url = "./app/views/exam.php";
             }          
             else if($_GET['page'] == "subject"){
-              $page_url = "../app/views/subject.php";
+              $page_url = "./app/views/subject.php";
             }
             else if($_GET['page'] == "user"){
-              $page_url = "../app/views/user.php";
+              $page_url = "./app/views/user.php";
             }
             else if($_GET['page'] == "topic"){
-              $page_url = "../app/views/topic.php";
+              $page_url = "./app/views/topic.php";
             }
             else if($_GET['page'] == "news"){
-              $page_url = "../app/views/news.php";
+              $page_url = "./app/views/news.php";
             }
             else if($_GET['page'] == "feedback"){
-              $page_url = "../app/views/feedback.php";
+              $page_url = "./app/views/feedback.php";
             }
             else if($_GET['page'] == "guidelines"){
-              $page_url = "../app/views/guidelines.php";
+              $page_url = "./app/views/guidelines.php";
             }
             else if($_GET['page'] == "logout"){
-              $page_url = "../app/controllers/php/logout.php";
+              $page_url = "./app/controllers/php/logout.php";
             }
             else{
-              $page_url = "../app/views/error404.php";
+              $page_url = "./app/views/error404.php";
             }
             require_once($page_url);
           }
           else{
-            require_once("../app/views/feedback.php");
+            require_once(getcwd()."/app/views/feedback.php");
           }
         }
 
@@ -97,7 +97,7 @@
   <script src="plugins/datatables/jquery.dataTables.min.js"></script>
   <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
   <!-- <script src="dist/js/jquery.routes.js"></script> -->
-  <script src="../app/controllers/app.js"></script>
+  <script src="./app/controllers/app.js"></script>
    <!-- <script src="../app/controllers/routes.js"></script> -->
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
@@ -253,7 +253,7 @@
   <script src="plugins/fastclick/fastclick.js"></script>
    <script src="plugins/sweetalert/sweetalert.min.js"></script>
   <script src="dist/js/app.min.js"></script>
-    <script src="../app/controllers/script.js"></script>
+    <script src="./app/controllers/script.js"></script>
   <script src="dist/js/demo.js"></script>
 </body>
 </html>
