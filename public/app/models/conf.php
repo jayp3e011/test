@@ -19,6 +19,6 @@
 	    exit;
 	}
 	
-	include_once(getcwd().'/app/controllers/php/UserClass.php');
+	include_once('UserClass.php');
 	$con = new UserClass($link);
 ?>
