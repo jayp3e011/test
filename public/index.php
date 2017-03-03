@@ -42,27 +42,27 @@
       <nav class="navbar navbar-static-top">
         <div class="container">
           <div class="navbar-header">
-            <a href="?page=login" class="navbar-brand"><b>i</b>MOCK</a>
+            <a href="?" class="navbar-brand" style="margin-left: -65px;"><b>i</b>MOCK</a>
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
               <i class="fa fa-bars"></i>
             </button>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse pull-right" id="navbar-collapse">
-            <ul class="nav navbar-nav">
-              <li class=""><a href="?page=dashboard">Dashboard</a></li>
+          <div class="collapse navbar-collapse pull-right" id="navbar-collapse" style="margin-right: -55px;">
+            <ul class="nav navbar-nav">              
+              <?php if(isset($_SESSION['ISLOGIN']))if($_SESSION['ISLOGIN']=="true")echo '<li class=""><a href="?page=dashboard">Dashboard</a></li>'; ?>
               <li class=""><a href="?page=login">Login</a></li>
-              <li><a href="?page=register">Register</a></li>
-              <li><a href="?page=user">User</a></li>
-              <li><a href="?page=exam">Exam</a></li>
-              <li><a href="?page=subject">Subject</a></li>
-              <li><a href="?page=question">Question</a></li>
-              <li><a href="?page=topic">Topic</a></li>
-              <li><a href="?page=quiz">Quiz</a></li>
-              <li><a href="?page=news">News</a></li>
-              <li><a href="?page=feedback">Feedback</a></li>
-              <li><a href="?page=logout">Logout</a></li>
+              <!-- <li><a href="?page=register">Register</a></li> -->
+              <?php if(isset($_SESSION['ISLOGIN']))echo '<li><a href="?page=exam">Exam</a></li>'; ?>
+              <?php if(isset($_SESSION['ISLOGIN']))echo '<li><a href="?page=user">User</a></li>'; ?>
+              <?php if(isset($_SESSION['ISLOGIN']))echo '<li><a href="?page=subject">Subject</a></li>'; ?>
+              <?php if(isset($_SESSION['ISLOGIN']))echo '<li><a href="?page=question">Question</a></li>'; ?>
+              <?php if(isset($_SESSION['ISLOGIN']))echo '<li><a href="?page=topic">Topic</a></li>'; ?>
+              <?php if(isset($_SESSION['ISLOGIN']))echo '<li><a href="?page=quiz">Quiz</a></li>'; ?>
+              <?php if(isset($_SESSION['ISLOGIN']))echo '<li><a href="?page=news">News</a></li>'; ?>
+              <?php if(isset($_SESSION['ISLOGIN']))echo '<li><a href="?page=feedback">Feedback</a></li>'; ?>
+              <?php if(isset($_SESSION['ISLOGIN']))echo '<li><a href="?page=logout">Logout</a></li>'; ?>
             </ul>
           </div>
           <!-- /.navbar-collapse -->
@@ -113,7 +113,7 @@
             }
           }                   
           else{
-            require_once("../app/views/login.php");  
+            require_once("../app/views/landingpage.php");  
           }
         }
       ?>        
