@@ -35,7 +35,7 @@ $(function () {
 	function doRenderSubject(subjectid){
 		$.ajax({
 	        method: "POST",
-	        url: "../app/models/exam.php",
+	        url: "./app/models/exam.php",
 	        data:{'subjectid':subjectid,'action':'getquestions'}
     	}).done(function(questions){
     		// console.log(questions);

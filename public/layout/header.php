@@ -13,7 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="plugins/sweetalert/sweetalert.css">
 
 	<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-	<link rel="stylesheet" href="dist/css/skins/skin-green.min.css">  
+	<link rel="stylesheet" href="dist/css/skins/skin-green-light.min.css">  
 	<link rel="stylesheet" href="dist/css/app.css">
 	<link href="dist/css/custom.css" rel="stylesheet" type="text/css" />
 
@@ -31,4 +31,4 @@
 
 	  <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 	  <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
-	  <script src="controllers/app.js"></script>
+	  <script src="app/controllers/app.js"></script>

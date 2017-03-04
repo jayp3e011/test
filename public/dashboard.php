@@ -4,7 +4,7 @@
 		if (intval($_SESSION['level'])==1) {
 		require_once('admin.php');
 		}
-		if (isset($_SESSION['level'])==0){
+		if (intval($_SESSION['level'])==0){
 			require_once('student.php');
 		}
 	}
