@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="plugins/iCheck/square/green.css">
 	<link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="plugins/sweetalert/sweetalert.css">
+	<link rel="stylesheet" type="text/css" href="plugins/select2/select2.min.css">
 
 	<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
 	<link rel="stylesheet" href="dist/css/skins/skin-green.min.css">  
@@ -27,8 +28,9 @@
 	  <!-- js plugins -->
 	  <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>  
 	  <script src="plugins/iCheck/icheck.min.js"></script>
+	  <script src="plugins/countdown/jquery.countdown.min.js"></script>
 	  <script src="dist/js/validator.min.js"></script>
 
 	  <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 	  <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
-	  <script src="controllers/app.js"></script>
+	  <script src="app/controllers/app.js"></script>
