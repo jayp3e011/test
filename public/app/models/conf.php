@@ -18,4 +18,6 @@
 	    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
 	    exit;
 	}
+	include_once('UserClass.php');
+	$con = new UserClass($link);
 ?>
