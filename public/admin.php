@@ -1,5 +1,5 @@
  <?php
-  include_once('app/controllers/php/dbconnect.php');
+  include_once('app/models/conf.php');
   if (!isset($_SESSION['level'])==1) {
     header('Location: /public');
   }
@@ -31,8 +31,8 @@
             else if($_GET['page'] == "guidelines"){
               $page_url = "app/views/guidelines.php";
             }
-            else if($_GET['page'] == "logout"){
-              $page_url = "app/controllers/php/logout.php";
+            else if($_GET['page'] == "question"){
+              $page_url = "app/views/question.php";
             }
             else{
               $page_url = "app/views/error404.php";
@@ -119,9 +119,9 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="?page=home">Home</a></li>
+            <!-- <li><a href="?page=home">Home</a></li>
             <li><a href="{{ url('/news') }}">News</a></li>
-            <li><a href="{{ url('/about') }}">About Us</a></li>
+            <li><a href="{{ url('/about') }}">About Us</a></li> -->
           </ul>
           <!-- <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
@@ -136,7 +136,7 @@
         <ul class="nav navbar-nav">
           <li>
             <!-- USERNAME/LOGOUT -->
-            <a href="#?" id="btnLogout">
+            <a href="#" id="btnLogout">
                 <i class="fa fa-fw fa-power-off"></i> LOGOUT
             </a>
             <!-- /USERNAME/LOGOUT -->
@@ -243,7 +243,7 @@
     </div>
     <strong>Copyright &copy;2016 <a href="#">J&J</a>.</strong> All rights reserved.
   </footer>
-< <script src="bootstrap/js/bootstrap.min.js"></script>
+ <script src="bootstrap/js/bootstrap.min.js"></script>
   <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
   <script src="plugins/fastclick/fastclick.js"></script>
    <script src="plugins/sweetalert/sweetalert.min.js"></script>

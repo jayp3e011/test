@@ -37,23 +37,22 @@ $('document').ready(function() {
 		}
 		
 		$.ajax({
-		type: 'POST',
-		url: '../app/models/login.php',
-		data: $('#login-form').serialize() + '&' + $('#login').attr('name') + '=' + $('#login').val(),
-		success: function(status){
-				if (status == true) {
-					$('#login').val('Signing in...');
-					setTimeout('window.location.href = "dashboard.php";',1000);
-				} else {
-					$('#err-msg').html('<div class="alert alert-danger text-center">Invalid email or password!</div>');
-					$('#email').val('');
-					$('#password').val('');
+			type: 'POST',
+			url: 'app/models/login.php',
+			data: $('#login-form').serialize() + '&' + $('#login').attr('name') + '=' + $('#login').val(),
+			success: function(status){
+					if (status == true) {
+						$('#login').val('Signing in...');
+						setTimeout('window.location.href = "dashboard.php";',1000);
+					} else {
+						$('#err-msg').html('<div class="alert alert-danger text-center">Invalid email or password!</div>');
+						$('#email').val('');
+						$('#password').val('');
+					}
 				}
-			}
+			});
 		});
-	});
-
-	$('#btnLogout').click(function (e) {
+		$('#btnLogout').click(function (e) {
 			// e.preventDefault();
 			$.ajax({
 			type: 'POST',

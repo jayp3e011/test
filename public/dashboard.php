@@ -9,6 +9,6 @@
 		}
 	}
 	else{
-		require_once('index.php');
+		require_once('/public');
 	}
 ?>

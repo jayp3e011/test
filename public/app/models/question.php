@@ -39,22 +39,47 @@
 			if($_POST['action']=="deletequestion"){
 				echo "delete question ok!";
 				$id = $_POST['id'];
-				$subject_id = $_POST['subjectid'];
-				$topic_id = $_POST['topicid'];
-				$question = $_POST['question'];
-				$choice_a = $_POST['choice_a'];
-				$choice_b = $_POST['choice_b'];
-				$choice_c = $_POST['choice_c'];
-				$choice_d = $_POST['choice_d'];
 				$answer= $_POST['answer'];
 				$reference = $_POST['reference'];
 				$sql = "delete from $table where id='$id'";
 				$result = mysqli_query($link, $sql) or die("Invalid query" . mysqli_error($link));
 				echo "ok";
 			}
+			if($_POST['action']=="importquestion"){
+				$question = $_POST['question'];
+				$choice_a = $_POST['choice_a'];
+				$choice_b = $_POST['choice_b'];
+				$choice_c = $_POST['choice_c'];
+				$choice_d = $_POST['choice_d'];
+				$answer = trim($_POST['answer']);
+				$reference = $_POST['reference'];
+				$sql = "insert into question1 VALUES('','$question','$answer','$choice_a','$choice_b','$choice_c','$choice_d','$reference')";
+				$result = mysqli_query($link, $sql) or die("Invalid query" . mysqli_error($link));
+				if ($result) {
+					echo "Success!....";
+				}
+				else
+				{
+					echo "Error";
+				}
+				echo $result;
+				
+			}
+			if ($_POST['action']=="getQuest1") {
+				$sql = "select * from question1";
+			    $result = mysqli_query($link, $sql) or die("Invalid query" . mysqli_error($link));
+				$arr = array();
+				$count=0;
+				while($row=mysqli_fetch_assoc($result)){
+					$arr[] = $row;
+					$count++;
+				}
+				echo json_encode($arr);
+			}
 		}
 		else{	
-			$sql = "select * from $table";
+			// $sql = "select * from $table";
+			$sql = "select q.id, coalesce(s.name) as subject_id, coalesce(t.name) as topic_id,q.question,q.choice_a,q.choice_b,q.choice_c,q.choice_d,q.answer,q.reference from $table q join topic t on t.id=q.topic_id join subject s on t.subject_id=s.id";
 		    $result = mysqli_query($link, $sql) or die("Invalid query" . mysqli_error($link));
 			$arr = array();
 			$count=0;

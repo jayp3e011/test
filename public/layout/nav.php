@@ -28,7 +28,7 @@
 			else if(value==="news")links+='<li><a href="?page=news">News</a></li>';
 			else if(value==="feedback")links+='<li><a href="?page=feedback">Feedback</a></li>';
 			else if(value==="guidelines")links+='<li><a href="?page=guidelines">Guidelines</a></li>';
-			else if(value==="logout")links+='<li><a href="#?" id="btnLogout">Logout</a></li>';
+			else if(value==="logout")links+='<li><a href="#" id="btnLogout">Logout</a></li>';
 
 			else if(value==="dashboard")links+='<li><a href="?page=dashboard">Dashboard</a></li>';
 		}
