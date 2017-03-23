@@ -1,5 +1,5 @@
  <?php
-  include_once('app/controllers/php/dbconnect.php');
+  include_once('app/models/conf.php');
   if (!isset($_SESSION['level'])==1) {
     header('Location: /public');
   }
@@ -31,8 +31,8 @@
             else if($_GET['page'] == "guidelines"){
               $page_url = "app/views/guidelines.php";
             }
-            else if($_GET['page'] == "logout"){
-              $page_url = "app/controllers/php/logout.php";
+            else if($_GET['page'] == "question"){
+              $page_url = "app/views/question.php";
             }
             else{
               $page_url = "app/views/error404.php";
@@ -73,7 +73,7 @@
   <title>iMock <?php if(isset($titlepage)) echo $titlepage; ?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="icon" type="image/png" href="favicon16.png">
+  <link rel="icon" type="image/png" href="dist/img/favicon.png" />
   <link rel="stylesheet" href="dist/css/font-awesome.min.css">
   <link rel="stylesheet" href="dist/css/ionicons.min.css">
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
@@ -91,6 +91,9 @@
 
   <script src="plugins/datatables/jquery.dataTables.min.js"></script>
   <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+  <?php if (isset($_SESSION['id'])) {
+  echo '<script> function getUID(){return '.$_SESSION['id'].';} </script>';
+ }?>
   <!-- <script src="dist/js/jquery.routes.js"></script> -->
   <script src="app/controllers/app.js"></script>
    <!-- <script src="app/controllers/routes.js"></script> -->
@@ -103,9 +106,9 @@
     <!-- Logo -->
     <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>iMk</b></span>
+      <span class="logo-mini imc-logo"><b>iMc</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>iMock</b></span>
+      <span class="logo-lg imc-logo"><b>iMock</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -119,9 +122,9 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="?page=home">Home</a></li>
+            <!-- <li><a href="?page=home">Home</a></li>
             <li><a href="{{ url('/news') }}">News</a></li>
-            <li><a href="{{ url('/about') }}">About Us</a></li>
+            <li><a href="{{ url('/about') }}">About Us</a></li> -->
           </ul>
           <!-- <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
@@ -136,7 +139,7 @@
         <ul class="nav navbar-nav">
           <li>
             <!-- USERNAME/LOGOUT -->
-            <a href="?page=logout">
+            <a href="#" id="btnLogout">
                 <i class="fa fa-fw fa-power-off"></i> LOGOUT
             </a>
             <!-- /USERNAME/LOGOUT -->
@@ -243,7 +246,8 @@
     </div>
     <strong>Copyright &copy;2016 <a href="#">J&J</a>.</strong> All rights reserved.
   </footer>
-< <script src="bootstrap/js/bootstrap.min.js"></script>
+
+ <script src="bootstrap/js/bootstrap.min.js"></script>
   <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
   <script src="plugins/fastclick/fastclick.js"></script>
    <script src="plugins/sweetalert/sweetalert.min.js"></script>

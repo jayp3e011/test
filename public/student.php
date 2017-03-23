@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
 	<?php include_once 'layout/header.php'; ?>

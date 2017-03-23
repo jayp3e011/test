@@ -2,7 +2,7 @@
 	<nav class="navbar navbar-static-top">
 		<div class="" style="margin-left: 8px;margin-right: 8px;">
 			<div class="navbar-header">
-				<a href="?page=login" class="navbar-brand"><b>i</b>MOCK</a>
+				<a href="?page=login" class="navbar-brand imc-logo"><b>i</b>Mock</a>
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
 					<i class="fa fa-bars"></i>
 				</button>
@@ -28,7 +28,7 @@
 			else if(value==="news")links+='<li><a href="?page=news">News</a></li>';
 			else if(value==="feedback")links+='<li><a href="?page=feedback">Feedback</a></li>';
 			else if(value==="guidelines")links+='<li><a href="?page=guidelines">Guidelines</a></li>';
-			else if(value==="logout")links+='<li><a href="?page=logout">Logout</a></li>';
+			else if(value==="logout")links+='<li><a href="#" id="btnLogout">Logout</a></li>';
 
 			else if(value==="dashboard")links+='<li><a href="?page=dashboard">Dashboard</a></li>';
 		}

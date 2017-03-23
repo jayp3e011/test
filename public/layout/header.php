@@ -16,7 +16,8 @@
 	<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
 	<link rel="stylesheet" href="dist/css/skins/skin-green.min.css">  
 	<link rel="stylesheet" href="dist/css/app.css">
-	<link href="dist/css/custom.css" rel="stylesheet" type="text/css" />
+	<!-- <link href="dist/css/custom.css" rel="stylesheet" type="text/css" /> -->
+	<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Abel|Oswald'>  
 
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -30,7 +31,9 @@
 	  <script src="plugins/iCheck/icheck.min.js"></script>
 	  <script src="plugins/countdown/jquery.countdown.min.js"></script>
 	  <script src="dist/js/validator.min.js"></script>
-
+	  <?php if (isset($_SESSION['id'])) {
+ 	echo '<script> function getUID(){return '.$_SESSION['id'].';} function getUName(){return '.$_SESSION['fullname'].';} </script>';
+ }?>
 	  <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 	  <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
 	  <script src="app/controllers/app.js"></script>
