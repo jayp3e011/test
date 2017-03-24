@@ -1,0 +1,24 @@
+The position or condition of a student with regards to the result of mock examination, may it be passed, failed, or conditional.  Initially, a student or reviewee is considered to have passed the examination if he/she obtained a general average of 75% or more with no grade lower than 65% in any given subject. Failed means a student or reviewee obtained a general average of less than 75% even if he/she has no grade lower than 65%. Conditional means a student or reviewee obtained a general average of 75% having majority of his/her subjects has a rating of at least 75% and the remaining subjects obtained a rating of lower than 65%. This means that the conditioned examinee shall re-take all the subjects under which he/she was conditioned or subjects having a grade below 65%. In order for the conditional student to be considered passed, the overall or general rating should be at least 75% and the re-taken subjects must not fall below 65%.These initial standards may be changed by the administrator or teacher depending on their discretion or decision.
+
+===========================================================
+PASSED
+if genAvg>=75% && subjAvg>=65(passingrate)% :. passed
+CONDITIONAL
+if genAvg==75% && subjAvg=75%(passingate) >= noOfSubj/2 :. conditional
+FAILED
+if genAvg<75% :.failed
+
+http://pinoyaccountant.blogspot.com/2011/07/passing-exam-and-conditional-status.html
+TO DO'S:
+1. EXAM PAGE
+2. FEDBACK PAGES/STUDENT CREATE AND ADMIN VIEW
+3. CONDITIONAL STATEMENTS ON TAKING EXAM
+4. GRAPH OF PASSED AND FAILED PER SUBJECT
+BUGS!
+1. SUBJECT UPDATE
+2. TOPIC CREATE - 3X INSERT ON 2ND CREATE
+3. TOPIC UPDATE
+4. DELETE GUIDELINES
+5. UPDATE GUIDELINES - INSERTING ON UPDATE
+6. UPDATE NEWS
+7. CREATE NEWS X4-INSERT 2ND CREATE
