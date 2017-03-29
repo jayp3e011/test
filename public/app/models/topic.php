@@ -6,45 +6,46 @@
 		$table='topic';
 		if(isset($_POST['action'])){
 			if($_POST['action']=="createtopic"){
-				echo "create topic ok!";
-				$user_id = $_POST['user_id'];
+				// echo "create topic ok!";
+				// $user_id = $_POST['user_id'];
 				$subject_id = $_POST['subject_id'];
 				$name = $_POST['name'];
 				$date = date("Y-m-d H:i:s"); 
-				$sql = "insert into $table VALUES('','$user_id','$subject_id', '$name','$date')";//
-				$result = mysqli_query($link, $sql) or die("Invalid query" . mysqli_error($link));
-				echo "ok";
+				$sql = "insert into $table VALUES('', '$subject_id', '$name','$date')";//
+				$result = mysqli_query($link, $sql) or die(json_encode(["result" => "not ok","message" => "Invalid query" . mysqli_error($link)]));				
+				echo json_encode(["result" => "ok"]);
 			}
 			if($_POST['action']=="updatetopic"){
-				echo "update topic ok!";
+				// echo "update topic ok!";
 				$id = $_POST['id'];
 				// $user_id = $_POST['user_id'];
 				$subject_id = $_POST['subject_id'];
 				$name = $_POST['name'];
 				// $date = $_POST['date'];
 				$sql = "update $table SET subject_id='$subject_id', name='$name' where id='$id'";//,date='$date'user_id='$user_id',
-				$result = mysqli_query($link, $sql) or die("Invalid query" . mysqli_error($link));
-				echo "ok";
+				$result = mysqli_query($link, $sql) or die(json_encode(["result" => "not ok","message" => "Invalid query" . mysqli_error($link)]));				
+				echo json_encode(["result" => "ok"]);
 			}
 			if($_POST['action']=="deletetopic"){
-				echo "delete topic ok!";
+				// echo "delete topic ok!";
 				$id = $_POST['id'];
 				// $user_id = $_POST['user_id'];
 				// $subject_id = $_POST['subject_id'];
 				// $name = $_POST['name'];
 				// $date = $_POST['date'];
 				$sql = "delete from $table  where id='$id'";
-				$result = mysqli_query($link, $sql) or die("Invalid query" . mysqli_error($link));
-				echo "ok";
+				$result = mysqli_query($link, $sql) or die(json_encode(["result" => "not ok","message" => "Invalid query" . mysqli_error($link)]));				
+				echo json_encode(["result" => "ok"]);
 			}
 		}
 		else{	
-			$sql = "select t.id, concat_ws(' ',u.firstname, u.lastname) as user_id, coalesce(s.name) as subject_id, t.name, t.date from $table t join user u on t.user_id=u.id join subject s on t.subject_id=s.id";
-			// $sql = "select * from $table";
+			$sql = "select t.id, coalesce(s.name) as subject_id, t.name, t.date from $table t join subject s on t.subject_id=s.id";
+			// $sql = "select * from $table where subject_id=1";
 		    $result = mysqli_query($link, $sql) or die("Invalid query" . mysqli_error($link));
 			$arr = array();
 			$count=0;
 			while($row=mysqli_fetch_assoc($result)){
+				$row['name']=htmlspecialchars($row['name']);
 				$arr[] = $row;
 				$count++;
 			}
